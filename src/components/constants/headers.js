@@ -1,4 +1,5 @@
 export const postRequest = (payload) => {
+  console.log(JSON.stringify(payload))
     let header =  {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -26,5 +27,11 @@ export const postRequest = (payload) => {
       password:"",
       username:"",
       otp:""
+    },
+    newBrand: {
+      name: "",
+      logoUrl:"",
+      popular:false,
+      type:"CAR",
     }
   }

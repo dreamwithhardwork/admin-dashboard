@@ -27,8 +27,12 @@ export const LOGIN_TYPE ={
     OTP_EMAIL: process.env.REACT_APP_LOGIN_OTP+"/api/v1/otp/send/email/",
     LOGIN: process.env.REACT_APP_LOGIN_OTP+"/api/v1/user/login",
     SIGNUP: process.env.REACT_APP_LOGIN_OTP+"/api/v1/user/signup" ,
+
     GET_REGISTERED_USER_BY_MOBILE: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/registered/users/mobile/",
     GET_REGISTERED_USER_BY_EMAIL: process.env.REACT_APP_USER_DETAILS+"/api/v1/admin/registered/users/email/",
-    GET_ALL_USERS: process.env.REACT_APP_USER_DETAILS+"/api/v1/admin/registered/users/all"
+    GET_ALL_USERS: process.env.REACT_APP_USER_DETAILS+"/api/v1/admin/registered/users/all",
+
+    GET_ALL_MAKES : process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/make/all?type=",
+    ADD_NEW_MAKE: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/make/add"
 
  }

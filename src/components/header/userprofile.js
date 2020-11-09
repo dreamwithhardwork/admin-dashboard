@@ -74,7 +74,7 @@ function UserProfile(props) {
                                 <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                                     <div style={{display:"flex",justifyContent:"center"}}>
                                     <input  accept="image/*" style={{display:"none"}} id="icon-button-file" type="file"/>
-                                     <label htmlFor="icon-button-file"> <IconButton color="default"aria-label="upload picture"component="span">
+                                     <label htmlFor="icon-button-file"> <IconButton color="default" aria-label="upload picture" component="span">
                                          <Avatar className={classes.avatarsize} src="default.png" style={{display:"inline-flex"}}></Avatar></IconButton></label>
                                     </div>
                                     <MenuItem style={{justifyContent:"center"}} onClick={handleClose}>{props.userDetails.name}</MenuItem>
