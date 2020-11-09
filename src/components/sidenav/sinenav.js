@@ -3,6 +3,7 @@ import {MenuList,Paper,Divider} from '@material-ui/core';
 import { Make, Cars, Bikes, Users, RTO, SellRequest, BookingRequest,CarProperties,BikeProperties, Dashboard } from './sidenavicons';
 import {Link} from 'react-router-dom';
 import {useStyles} from './styles';
+import NewCar from '../main/make';
 
 function SideNav(props){
     const classes = useStyles();
@@ -27,6 +28,7 @@ function SideNav(props){
                 <Divider/>
             </MenuList>
         </Paper>
+        <NewCar/>
         </div>
     )
 }

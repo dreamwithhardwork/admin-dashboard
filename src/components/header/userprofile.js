@@ -4,7 +4,8 @@ import {NotificationsActive as NotificationsActiveIcon} from '@material-ui/icons
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import {useStyles} from './styles';
 import {ACTION_TYPES} from '../constants/constants';
-import { useDispatch } from 'react-redux';
+import { useDispatch, connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 
 
@@ -14,9 +15,8 @@ function UserProfile(props) {
     const classes = useStyles();
     const anchorRef = React.useRef(null);
     const [open, setOpen] = React.useState(false)
-    const store = props.store;
-    const rootstate = store.getState();
-     const dispatch =  useDispatch()
+     const dispatch =  useDispatch();
+     const history = useHistory();
 
     const defaultProps = {
         color: 'secondary',
@@ -36,7 +36,8 @@ function UserProfile(props) {
     };
     const logout = (event) => {
         handleClose(event)
-        dispatch({type:ACTION_TYPES.LOGOUT})
+        props.logout();
+        history.push("/")
     }
     function handleListKeyDown(event) {
         if (event.key === 'Tab') {
@@ -76,7 +77,7 @@ function UserProfile(props) {
                                      <label htmlFor="icon-button-file"> <IconButton color="default"aria-label="upload picture"component="span">
                                          <Avatar className={classes.avatarsize} src="default.png" style={{display:"inline-flex"}}></Avatar></IconButton></label>
                                     </div>
-                                    <MenuItem style={{justifyContent:"center"}} onClick={handleClose}>{rootstate.userDetails.name}</MenuItem>
+                                    <MenuItem style={{justifyContent:"center"}} onClick={handleClose}>{props.userDetails.name}</MenuItem>
                                     <MenuItem style={{justifyContent:"center"}} onClick={handleClose}>My account</MenuItem>
                                     <MenuItem style={{justifyContent:"center"}} onClick={(e)=>logout(e)}>Logout</MenuItem>
                                 </MenuList>
@@ -89,4 +90,18 @@ function UserProfile(props) {
     )
 }
 
-export default UserProfile
+const mapDispatchToPros = (dispatch) => {
+    return {
+        logout: () => {
+            dispatch({type:"LOGOUT"})
+        }
+    }
+}
+
+const mapStateToProps = state => {
+    return {
+        ...state
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToPros)(UserProfile)
