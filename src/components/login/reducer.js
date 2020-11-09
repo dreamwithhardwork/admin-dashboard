@@ -36,7 +36,10 @@ export const reducer = (state, action) => {
         break;
 
         case ACTION_TYPES.LOGIN :
-            handleLogin(newState);
+            newState.toastOpen = true;
+            newState.toastMessageSeverity = action.toastMessageSeverity;
+            newState.toastMessage = action.toastMessage;
+            newState.backdrop = false;
         break;
 
         case ACTION_TYPES.CLOSE_TOAST_MESSAGE:
@@ -45,6 +48,14 @@ export const reducer = (state, action) => {
 
         case ACTION_TYPES.LINEAR_PROGRESS:
             newState.linearProgress = true;
+        break;
+
+        case ACTION_TYPES.OPEN_BACKDROP:
+            newState.backdrop = true;
+        break;
+
+        case ACTION_TYPES.CLOSE_BACKDROP:
+            newState.backdrop = false;
         break;
         
         case ACTION_TYPES.OTP_SENT :
@@ -104,10 +115,6 @@ const reset =(state) => {
     state.otpButtonDisabled = true;
     state.loginButtonDisabled =  true ;
 
-}
-
-const handleLogin = (state) => {
-    console.log("login");
 }
 
 

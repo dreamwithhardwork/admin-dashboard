@@ -1,15 +1,18 @@
 import {Button, TextField, Dialog, DialogActions,DialogContent,DialogContentText,DialogTitle,FormControlLabel,Switch,LinearProgress, Backdrop} from '@material-ui/core';
-import React, { useReducer } from 'react';
+import React from 'react';
 import {reducer,initialState} from './reducer';
 import {ACTION_TYPES} from '../constants/constants';
-import {sendOtp} from './loginservice';
+import {sendOtp,login} from './loginservice';
 import {useStyles} from './loginstyle';
-import CustomizedSnackbars from '../messages/toastmessage'
+import CustomizedSnackbars from '../messages/toastmessage';
+import BackDrop from '../messages/backdrop';
+import { useStore } from 'react-redux';
 
 function LoginForm(props){
 
-    const[localstate, localDispatch] = useReducer(reducer,initialState);
+    const[localstate, localDispatch] = React.useReducer(reducer,initialState);
     const classes= useStyles();
+    const store = useStore();
     const handleToastClose = (event, reason) => {
         if (reason === 'clickaway') {
           return;
@@ -17,6 +20,15 @@ function LoginForm(props){
     
         localDispatch({type:ACTION_TYPES.CLOSE_TOAST_MESSAGE});
       };
+
+    const handleBackdropClose = () =>{
+        localDispatch({type:ACTION_TYPES.OPEN_BACKDROP});
+    }
+
+    const closeLoginForm = () =>{
+        props.close({type:"LOGIN_CLOSE"});
+    }
+
 
     return (
         <Dialog open={props.open} maxWidth={"xs"} fullWidth={true} aria-labelledby="form-dialog-title">
@@ -40,11 +52,17 @@ function LoginForm(props){
 
 
             <DialogActions>
-                <Button onClick={() => {props.close({type:"LOGIN_CLOSE"})}} color="primary">Cancel</Button>
-                <Button  color="primary" disabled = {localstate.loginButtonDisabled}   onClick = {() => localDispatch({type:ACTION_TYPES.LOGIN})}>Login</Button>
+                <Button onClick={closeLoginForm} color="primary">Cancel</Button>
+                <Button  color="primary" disabled = {localstate.loginButtonDisabled}   
+                onClick = {async () => {
+                    let loggedin = await login(localstate,localDispatch,store);
+                    if(loggedin)
+                    closeLoginForm();
+                    }}>Login</Button>
             </DialogActions>
 
-            <Backdrop open ={localstate.backdrop}></Backdrop>
+
+            <BackDrop open ={localstate.backdrop} close = {handleBackdropClose}></BackDrop>
             <CustomizedSnackbars close= {handleToastClose}  open={localstate.toastOpen}  severity={localstate.toastMessageSeverity} message={localstate.toastMessage} />
             
         </Dialog>

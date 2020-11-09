@@ -20,7 +20,7 @@ export const useStyles = makeStyles((theme) => ({
         marginLeft: theme.spacing(4),
     },
     avatarsize: {
-        width: theme.spacing(19),
-        height: theme.spacing(19),
+        width: theme.spacing(10),
+        height: theme.spacing(10),
       }
 }));

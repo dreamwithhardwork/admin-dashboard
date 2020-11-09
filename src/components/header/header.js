@@ -16,7 +16,7 @@ function Header(props){
     const [state, localDispatch] = useReducer(reducer,initialState);
     const store = useStore();
     const rootState = store.getState();
-    
+    console.log("rendereeeeeee")
     return(
         <div className={classes.root}>
             <AppBar color="default" position="sticky">
@@ -27,7 +27,7 @@ function Header(props){
                     <Button><img style={{width:"140px",marginLeft:"5px"}} src={logo}></img></Button>
                     <Typography variant="h6" className={classes.title}></Typography>
                     {
-                        rootState.login ? <UserProfile /> : <Button color="inherit" className={props.login ? classes.displayNone : classes.displayBlock} 
+                        rootState.login ? <UserProfile store = {store} /> : <Button color="inherit" className={rootState.login ? classes.displayNone : classes.displayBlock} 
                         onClick = {() => localDispatch({type:ACTION_TYPES.LOGIN_OPEN})} >Login</Button>
                     }
                 </Toolbar>
