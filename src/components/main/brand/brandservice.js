@@ -13,7 +13,6 @@ export const getAllBrands = async () => {
 }
 
 export const addNewbrand = async (popular,name,logoUrl) => {
-    debugger;
     let payload = {
     }
     payload.type="CAR";

@@ -13,6 +13,7 @@ function LoginForm(props){
     const[localstate, localDispatch] = React.useReducer(reducer,initialState);
     const classes= useStyles();
     const store = useStore();
+
     const handleToastClose = (event, reason) => {
         if (reason === 'clickaway') {
           return;
@@ -56,8 +57,11 @@ function LoginForm(props){
                 <Button  color="primary" disabled = {localstate.loginButtonDisabled}   
                 onClick = {async () => {
                     let loggedin = await login(localstate,localDispatch,store);
-                    if(loggedin)
-                    closeLoginForm();
+                    if(loggedin){
+                        closeLoginForm();
+                        localDispatch({type:"RESET"});
+                    }
+                    
                     }}>Login</Button>
             </DialogActions>
 
@@ -68,5 +72,6 @@ function LoginForm(props){
         </Dialog>
     )
 }
+
 
 export default LoginForm;

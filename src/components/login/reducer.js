@@ -21,7 +21,7 @@ export const initialState = {
 
 export const reducer = (state, action) => {
 
-    const newState = {...state}
+    let newState = {...state}
     switch(action.type){
         case ACTION_TYPES.TOGGLE_SWITCH :
             handleToggleSwitch(action.event,newState);
@@ -65,6 +65,10 @@ export const reducer = (state, action) => {
             newState.toastMessage = action.toastMessage
             newState.passwordFieldDisplay = action.passwordFieldDisplay;
         break;
+
+        case "RESET":
+            newState = {...initialState}
+            break;
 
         default:
             break;
