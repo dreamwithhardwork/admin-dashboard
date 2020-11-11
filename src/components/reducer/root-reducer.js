@@ -4,7 +4,12 @@ import {validateJwt,getUserDetails} from '../static/util'
 
 const initialState = {
     login:false,
-    userDetails: {}
+    userDetails: {},
+    toast: {
+        open: false,
+        severity: "error",
+        message:"!!"
+    }
 }
 
 const setInitialState = () =>{
@@ -25,6 +30,7 @@ setInitialState();
 const rootReducer = (state = initialState, action) => {
 
     const newState = {...state}
+    let newToast = {...newState.toast}
     console.log(newState)
     switch(action.type){
 
@@ -37,6 +43,15 @@ const rootReducer = (state = initialState, action) => {
             newState.userDetails = {};
             localStorage.removeItem("token");
      break;
+
+     case ACTION_TYPES.TOAST:
+         newState.toast = action.toast
+         break;
+    
+    case ACTION_TYPES.TOASTRESET:
+        newState.toast = newToast;
+        newState.toast.open = false;
+        break;
 
       default:
       break;

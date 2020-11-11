@@ -1,6 +1,8 @@
 import MUIDataTable from "mui-datatables";
 import { PinDropSharp } from "@material-ui/icons";
 import { Switch, FormControlLabel, Container, Box } from "@material-ui/core";
+import {ACTION_TYPES} from '../../constants/constants'
+import { connect } from "react-redux";
 
 function StickyHeadTable(props) {
   const columns = [
@@ -69,6 +71,7 @@ function StickyHeadTable(props) {
       let itemTodelete =  newData.splice(ind,1);
       console.log(itemTodelete);
       props.update(newData);
+      props.toastMessage({open:true,severity:"success",message:itemTodelete[0].name+" deletion success!!!"})
     },
     setRowProps: (row, dataIndex, rowIndex) => {
       return {
@@ -99,4 +102,13 @@ function StickyHeadTable(props) {
 
 }
 
-export default StickyHeadTable;
+const mapDispatchToProps = dispatch => {
+  return{
+    toastMessage: (toast) => {
+      dispatch({type:ACTION_TYPES.TOAST,toast:toast})
+    }
+
+  }
+}
+
+export default connect(null,mapDispatchToProps)(StickyHeadTable);
