@@ -1,7 +1,9 @@
 import { useStore, connect } from "react-redux";
 import {ACTION_TYPES} from '../constants/constants';
 import CustomizedSnackbars from "../messages/toastmessage";
+import BackDrop from '../messages/backdrop';
 const { default: Make } = require("./brand/make");
+
 
 
 function Main(props){
@@ -21,6 +23,7 @@ function Main(props){
          :<div style={{color:"red"}}>Login to view content .........</div>}  
          
          <CustomizedSnackbars close= {handleToastClose}  open={props.toast.open}  severity={props.toast.severity} message={props.toast.message} />
+         <BackDrop open ={props.backdrop}></BackDrop>
         </div>
     )
 }

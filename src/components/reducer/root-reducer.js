@@ -9,7 +9,8 @@ const initialState = {
         open: false,
         severity: "error",
         message:"!!"
-    }
+    },
+    backdrop:false
 }
 
 const setInitialState = () =>{
@@ -51,6 +52,15 @@ const rootReducer = (state = initialState, action) => {
     case ACTION_TYPES.TOASTRESET:
         newState.toast = newToast;
         newState.toast.open = false;
+        break;
+
+    case ACTION_TYPES.OPEN_BACKDROP:
+        console.log("back droppp");
+        newState.backdrop = true;
+    break;
+
+    case ACTION_TYPES.CLOSE_BACKDROP:
+        newState.backdrop = false;
         break;
 
       default:

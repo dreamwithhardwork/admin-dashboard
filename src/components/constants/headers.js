@@ -20,6 +20,15 @@ export const postRequest = (payload) => {
     return header;
   }
 
+  export const deleteRequest= () => {
+    let header =  {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' }
+    }
+    header.headers.Authorization = "Bearer "+localStorage.getItem("token");
+    return header;
+  }
+
 
   export const payloads = {
     login: {
