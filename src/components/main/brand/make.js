@@ -4,6 +4,7 @@ import { Paper } from '@material-ui/core';
 import {getAllBrands} from "./brandservice";
 import React, { useState } from 'react'
 import NewBrandModel from './newbrandform';
+import StickyHeadTable from './tableview';
 
 function Make(){
 
@@ -23,6 +24,7 @@ function Make(){
             
     },[])
     return(
+        <React.Fragment>
     <div style={{display:"flex",flexWrap:"wrap",maxHeight:"400px",height:"fit-content",maxWidth:"600px",overflow:"auto"}}>
         <div style={{display:"flex",margin:"3px",width:"80px",alignItems:"center",justifyContent:"center"}}>
             <Paper elevation={3} onClick={()=>{setDialogNewMake(true)}} style={{width:"100%",textAlign:"center",height:"fit-content"}} > <AddIcon/>  </Paper>
@@ -34,6 +36,8 @@ function Make(){
        }
        <NewBrandModel open = {openAddMake} close={setDialogNewMake} update={updateBrands} />
       </div>
+      <StickyHeadTable data={makeList} update={setMakeList}/>
+      </React.Fragment>
     )
 }
 
