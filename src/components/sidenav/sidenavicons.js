@@ -8,12 +8,14 @@ import PeopleIcon from '@material-ui/icons/People';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import SettingsApplicationsIcon from '@material-ui/icons/SettingsApplications';
 import DashboardIcon from '@material-ui/icons/Dashboard'
-
+import AddIcon from '@material-ui/icons/Add';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import LoyaltyIcon from '@material-ui/icons/Loyalty';
 export function Make() {
     return (
         <MenuItem >
             <ListItemIcon>
-                <object className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall" style={{color:"white"}} data={MakeIcon} type="image/svg+xml"> </object>
+                <AddIcon fontSize="small" style={{color:"white"}}/>
             </ListItemIcon>
             <Typography variant="inherit" >Make</Typography>
         </MenuItem>
@@ -81,7 +83,7 @@ export function SellRequest() {
     return (
         <MenuItem>
             <ListItemIcon>
-                <object className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall" data={SellReqIcon} type="image/svg+xml"> </object>
+                <ShoppingCartIcon style={{color:"white"}} fontSize="small"/>
             </ListItemIcon>
             <Typography variant="inherit" noWrap>Sell Requests</Typography>
         </MenuItem>
@@ -92,7 +94,7 @@ export function BookingRequest() {
     return (
         <MenuItem>
             <ListItemIcon>
-                <object className="MuiSvgIcon-root MuiSvgIcon-fontSizeSmall" data={BookingIcon} type="image/svg+xml"> </object>
+               <LoyaltyIcon fontSize="small" style={{color:"white"}}></LoyaltyIcon>
             </ListItemIcon>
             <Typography variant="inherit" noWrap>
                 Booking Requests
@@ -108,7 +110,7 @@ export function CarProperties() {
                 <SettingsApplicationsIcon style={{color:"white"}} fontSize="small" />
             </ListItemIcon>
             <Typography variant="inherit" noWrap>
-                Bike Properties
+            Car Properties
           </Typography>
         </MenuItem>
     )
@@ -121,7 +123,7 @@ export function BikeProperties() {
                 <SettingsApplicationsIcon style={{color:"white"}} fontSize="small" />
             </ListItemIcon>
             <Typography variant="inherit" noWrap>
-                Car Properties
+                Bike Properties
           </Typography>
         </MenuItem>
     )

@@ -28,13 +28,13 @@ function Make(){
     },[])
     return(
         <React.Fragment>
-           <Paper elevation={7} style={{height:"fit-content"}}> 
+           <Paper elevation={0} style={{height:"fit-content"}}> 
             <Paper elevation={10} style={{display:"flex",maxWidth:"500",justifyContent:"flex-end"}}> 
             <FormControlLabel style={{color:"red"}} onClick={()=>{gridView?setGridView(false):setGridView(true)}} control={<AppsSharp/> }></FormControlLabel> 
             </Paper>
       {
        gridView?
-       <Paper style={{display:"flex",flexWrap:"wrap",maxHeight:"300px",height:"fit-content",maxWidth:"580px",overflow:"auto"}}> 
+       <div style={{display:"flex",flexWrap:"wrap",maxHeight:"300px",height:"fit-content",maxWidth:"540px",overflow:"auto"}}> 
        {
           [
             <div style={{display:"flex",margin:"5px",width:"80px",alignItems:"center",justifyContent:"center"}}>
@@ -45,8 +45,8 @@ function Make(){
           ]
        }
        <NewBrandModel open = {openAddMake} close={setDialogNewMake} update={updateBrands} />
-      </Paper>:
-      <div style={{display:"flex",flexWrap:"wrap",maxHeight:"400px",height:"fit-content",maxWidth:"580px",overflow:"auto"}}> 
+      </div>:
+      <div style={{display:"flex",flexWrap:"wrap",maxHeight:"400px",height:"fit-content",maxWidth:"540px",overflow:"auto"}}> 
       <StickyHeadTable data={makeList} update={setMakeList}/>
       </div>
       }

@@ -6,7 +6,7 @@ import {sendOtp,login} from './loginservice';
 import {useStyles} from './loginstyle';
 import CustomizedSnackbars from '../messages/toastmessage';
 import BackDrop from '../messages/backdrop';
-import { useStore } from 'react-redux';
+import { useStore, connect } from 'react-redux';
 
 function LoginForm(props){
 
@@ -59,6 +59,7 @@ function LoginForm(props){
                     let loggedin = await login(localstate,localDispatch,store);
                     if(loggedin){
                         closeLoginForm();
+                        props.showToast();
                         localDispatch({type:"RESET"});
                     }
                     
@@ -73,5 +74,11 @@ function LoginForm(props){
     )
 }
 
+const mapDispatchToProps = dispatch => {
+    return{
+        showToast: () => {dispatch({type:ACTION_TYPES.TOAST,toast:{open:true,severity:"success",message:"logged in successfully"}})}
+    }
+}
 
-export default LoginForm;
+
+export default connect(null,mapDispatchToProps)(LoginForm);

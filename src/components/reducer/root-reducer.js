@@ -10,7 +10,9 @@ const initialState = {
         severity: "error",
         message:"!!"
     },
-    backdrop:false
+    backdrop:false,
+    toggleSidenav: false
+
 }
 
 const setInitialState = () =>{
@@ -61,6 +63,9 @@ const rootReducer = (state = initialState, action) => {
 
     case ACTION_TYPES.CLOSE_BACKDROP:
         newState.backdrop = false;
+        break;
+    case ACTION_TYPES.SIDENAVBAR:
+        newState.toggleSidenav = !newState.toggleSidenav;
         break;
 
       default:

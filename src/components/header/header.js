@@ -13,12 +13,12 @@ import CustomizedSnackbars from '../messages/toastmessage';
 function Header(props){
     const classes = useStyles();
     const [state, localDispatch] = useReducer(reducer,initialState);
-    console.log("rendereeeeeee")
     return(
         <div className={classes.root}>
             <AppBar color="default" position="sticky">
                 <Toolbar>
-                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick = {() => {localDispatch({type:ACTION_TYPES.SIDENAVBAR})}}>
+                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" 
+                    onClick = {() => {props.toggleSidenav()}}>
                         <MenuIcon />
                     </IconButton>
                     <Button><img style={{width:"140px",marginLeft:"5px"}} src={logo}></img></Button>
@@ -29,10 +29,6 @@ function Header(props){
                     }
                 </Toolbar>
             </AppBar>
-            
-            <SideNav toggle = {state.sideNavOpen}/>
-
-            
             <CustomizedSnackbars />
             <LoginForm open = {state.loginOpen} close= {localDispatch}></LoginForm>
         </div>
@@ -43,6 +39,9 @@ const mapDispatchToPros = (dispatch) => {
     return {
         logout: () => {
             dispatch({type:"LOGOUT"})
+        },
+        toggleSidenav: () => {
+            dispatch({type:ACTION_TYPES.SIDENAVBAR})
         }
     }
 }

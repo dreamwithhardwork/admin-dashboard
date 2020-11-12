@@ -1,0 +1,38 @@
+
+.side-nav {
+    transition: width 1s !important;
+    height: calc(100vh - 104px);
+    background-color:#3c4b64 !important;
+    color:white !important;
+}
+
+.open{
+    width: 230px;
+}
+
+.close{
+    width: 56px
+}
+.list {    
+    text-decoration: none;
+    color: white;
+}
+
+
+@media screen and (max-width: 720px){
+
+    .side-nav {
+        transition: width 1s !important;
+        height: calc(100vh - 96px) !important;
+        background-color:#3c4b64 !important;
+        color:white !important;
+    }
+
+    .open{
+        width: 56px;
+    }
+    
+    .close{
+        width: 230px
+    }
+}
