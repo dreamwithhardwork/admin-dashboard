@@ -6,14 +6,19 @@ import { Actions } from "./reducer";
 import { connect } from "react-redux";
 
 function AutoRideToolBar(props){
+
+    const handleFlilter =(event) => {
+        props.filter(event.target.value);
+    }
+
     return(
         <Paper className="toolbar" elevation={0}>
             <Typography variant="h6"  style={{marginLeft:"30px",color:"rgba(0, 0, 0, 0.54)"}}>
-             Brands
+             {props.type}
             </Typography>
              <Box style={{marginRight:"50px"}}>
-             <InputBase  placeholder="Search Brands" inputProps={{ 'aria-label': 'search google maps' }}/>
-             <Tooltip arrow title="search" placement="left"><FormControlLabel style={{padding:"5px",color:"rgba(0, 0, 0, 0.54)"}} control={<SearchIcon/>}/></Tooltip>
+             <InputBase onChange={handleFlilter}  placeholder={`Search ${props.type}`} inputProps={{ 'aria-label': 'search google maps' }}/>
+             <FormControlLabel style={{padding:"5px",color:"rgba(0, 0, 0, 0.54)"}} control={<SearchIcon/>}/>
              <Tooltip onClick={()=>{props.openModel()}}  arrow title="Add new Brand" placement="top-start"><FormControlLabel style={{padding:"5px",color:"rgba(0, 0, 0, 0.54)"}} control={<AddIcon/>}/></Tooltip>
              <Tooltip arrow placement="right-end" title="Table/Grid View"><FormControlLabel style={{padding:"5px",color:"rgba(0, 0, 0, 0.54)"}} control={<ViewComfyIcon/>}/></Tooltip>
             </Box>

@@ -39,7 +39,8 @@ function LoginForm(props){
                 <FormControlLabel
                     control={<Switch checked={localstate.toggleSwitch} onChange = {(e) => {localDispatch({type:ACTION_TYPES.TOGGLE_SWITCH,event:e})}} />} label="Login With OTP" />
                   <LinearProgress className={!localstate.linearProgress ? classes.displayNone : classes.displayBlock} color="secondary" />
-                  <TextField  value={localstate.username} onChange={(e) =>{localDispatch({type:ACTION_TYPES.USERNAME_CHANGE,event:e})}}  autoFocus margin="dense" id="email-phone" label="Email/Phone*" type="email" variant="outlined" fullWidth
+                  <TextField  value={localstate.username} onChange={(e) =>{localDispatch({type:ACTION_TYPES.USERNAME_CHANGE,event:e})}}  
+                  autoFocus margin="dense" id="email-phone" label="Email/Phone*" type="email" variant="outlined" fullWidth
                     InputProps={{
                         endAdornment: <Button disabled = {localstate.otpButtonDisabled} id="otp" color="secondary"  onClick = {() => {sendOtp(localstate,localDispatch)}}
                         className={!localstate.toggleSwitch ? classes.displayNone : classes.displayBlock}>Get&nbsp;OTP</Button>

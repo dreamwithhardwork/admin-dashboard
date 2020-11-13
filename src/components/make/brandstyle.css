@@ -1,14 +1,23 @@
 .brand-logo {
     display: flex;
-    padding: 10px;
+    padding: 5px;
     width: 20%;
     height: fit-content;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
+    max-width: 100px;
+    min-width: 70px;
+   
+    
+}
+
+.brand-logo  :hover{
+    background: linear-gradient(45deg, grey, transparent) !important;
 }
 
 .brand-image {
     width: 100%;
     height: auto;
+    cursor: pointer;
 }
