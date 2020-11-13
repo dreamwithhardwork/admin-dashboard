@@ -15,7 +15,6 @@ function Make(){
     const [gridView, setGridView]= useState(true);
 
     const updateBrands = (newBrand) => {
-        debugger;
         let newMakeList = [...makeList]
         newMakeList.push(newBrand);
         setMakeList(newMakeList);

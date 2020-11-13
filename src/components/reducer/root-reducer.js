@@ -11,7 +11,8 @@ const initialState = {
         message:"!!"
     },
     backdrop:false,
-    toggleSidenav: false
+    toggleSidenav: false,
+    newBrandModel: false
 
 }
 
@@ -66,6 +67,12 @@ const rootReducer = (state = initialState, action) => {
         break;
     case ACTION_TYPES.SIDENAVBAR:
         newState.toggleSidenav = !newState.toggleSidenav;
+        break;
+    case ACTION_TYPES.NEW_BRAND_MODEL_OPEN:
+        newState.newBrandModel = true;
+        break;
+    case ACTION_TYPES.NEW_BRAND_MODEL_CLOSE:
+        newState.newBrandModel = false;
         break;
 
       default:
