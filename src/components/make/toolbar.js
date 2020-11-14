@@ -1,14 +1,21 @@
-import { Toolbar, Paper, Typography, Box, FormControlLabel, Tooltip, InputBase, IconButton } from "@material-ui/core";
+import { Paper, Typography, Box, FormControlLabel, Tooltip, InputBase } from "@material-ui/core";
 import AddIcon from '@material-ui/icons/Add';
 import SearchIcon from '@material-ui/icons/Search';
 import ViewComfyIcon from '@material-ui/icons/ViewComfy';
 import { Actions } from "./reducer";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 function AutoRideToolBar(props){
 
     const handleFlilter =(event) => {
         props.filter(event.target.value);
+    }
+
+    const history = useHistory();
+
+    const addform = () => {
+      props.type==="Brand"?props.openModel():history.push("/addModel");
     }
 
     return(
@@ -19,7 +26,7 @@ function AutoRideToolBar(props){
              <Box style={{marginRight:"50px"}}>
              <InputBase onChange={handleFlilter}  placeholder={`Search ${props.type}`} inputProps={{ 'aria-label': 'search google maps' }}/>
              <FormControlLabel style={{padding:"5px",color:"rgba(0, 0, 0, 0.54)"}} control={<SearchIcon/>}/>
-             <Tooltip onClick={()=>{props.openModel()}}  arrow title="Add new Brand" placement="top-start"><FormControlLabel style={{padding:"5px",color:"rgba(0, 0, 0, 0.54)"}} control={<AddIcon/>}/></Tooltip>
+             <Tooltip onClick={addform}  arrow title="Add new Brand" placement="top-start"><FormControlLabel style={{padding:"5px",color:"rgba(0, 0, 0, 0.54)"}} control={<AddIcon/>}/></Tooltip>
              <Tooltip arrow placement="right-end" title="Table/Grid View"><FormControlLabel style={{padding:"5px",color:"rgba(0, 0, 0, 0.54)"}} control={<ViewComfyIcon/>}/></Tooltip>
             </Box>
         </Paper>

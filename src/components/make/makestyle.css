@@ -9,6 +9,7 @@
     flex-direction: column;
     flex-grow: 1;
     max-height: 65%;
+    min-height: 50%;
     min-width: 400px;
     margin:10px 10px;
     box-sizing: border-box;
@@ -21,4 +22,12 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+@media screen and (max-width: 720px){
+
+    .toolbar h6 {
+        display: none
+    }
+
 }

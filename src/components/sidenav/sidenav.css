@@ -4,6 +4,7 @@
     height: calc(100vh - 104px);
     background-color:#3c4b64 !important;
     color:white !important;
+    overflow: auto;
 }
 
 .open{
@@ -26,6 +27,7 @@
         height: calc(100vh - 96px) !important;
         background-color:#3c4b64 !important;
         color:white !important;
+        overflow: auto;
     }
 
     .open{

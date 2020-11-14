@@ -10,16 +10,16 @@ function ModelDetails() {
         <Card className="carosel">
             <CardActionArea style={{ display: "flex" }}>
                 <Carousel indicators={false} >
-                    <CardMedia component="img" image="https://stimg.cardekho.com/images/carexteriorimages/930x620/Renault/KWID/7426/1580286379253/front-left-side-47.jpg"
+                    <CardMedia component="img" image="https://stimg.cardekho.com/images/carexteriorimages/930x620/Kia/Seltos/6226/1580962193955/front-left-side-47.jpg"
                         title="Contemplative Reptile" />
                 </Carousel>
             </CardActionArea>
             <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
-                    Renault Kwid
+                    Kia Seltos
           </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                    Renault has launched a new base-spec RXL variant for the Kwid 1.0-litre.
+                    The compact SUV is available in two trims: Tech Line and GT Line. The Tech Line is available in five
           </Typography>
             </CardContent>
         </Card>
