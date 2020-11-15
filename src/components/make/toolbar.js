@@ -23,8 +23,8 @@ function AutoRideToolBar(props){
             <Typography variant="h6"  style={{marginLeft:"30px",color:"rgba(0, 0, 0, 0.54)"}}>
              {props.type}
             </Typography>
-             <Box style={{marginRight:"50px"}}>
-             <InputBase onChange={handleFlilter}  placeholder={`Search ${props.type}`} inputProps={{ 'aria-label': 'search google maps' }}/>
+             <Box className="toolbar-box">
+             <InputBase  style={{maxWidth:"180px"}} onChange={handleFlilter}  placeholder={`Search ${props.type}`} inputProps={{ 'aria-label': 'search' }}/>
              <FormControlLabel style={{padding:"5px",color:"rgba(0, 0, 0, 0.54)"}} control={<SearchIcon/>}/>
              <Tooltip onClick={addform}  arrow title="Add new Brand" placement="top-start"><FormControlLabel style={{padding:"5px",color:"rgba(0, 0, 0, 0.54)"}} control={<AddIcon/>}/></Tooltip>
              <Tooltip arrow placement="right-end" title="Table/Grid View"><FormControlLabel style={{padding:"5px",color:"rgba(0, 0, 0, 0.54)"}} control={<ViewComfyIcon/>}/></Tooltip>

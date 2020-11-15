@@ -34,7 +34,7 @@ function Model(props){
 
 
     return(
-        <Paper elevation={0} className="makeroot">
+        <Paper elevation={0} className="modelroot">
             <AutoRideToolBar type="Model" filter={handleFilter}/>
             <div style={{display:"flex"}}>
            {

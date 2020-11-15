@@ -1,0 +1,26 @@
+.makemodel {
+    display: flex;
+    width: 40%;
+    min-width: 300px;
+    overflow: auto;
+    flex-direction: column;
+}
+
+.makebody {
+    display: flex;
+}
+
+
+@media screen and (max-width: 720px){
+    .makebody {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .makemodel {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        overflow: inherit;
+    }
+}

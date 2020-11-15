@@ -14,7 +14,7 @@ function ModelDetails() {
                         title="Contemplative Reptile" />
                 </Carousel>
             </CardActionArea>
-            <CardContent>
+            <CardContent style={{flexGrow:1}}>
                 <Typography gutterBottom variant="h5" component="h2">
                     Kia Seltos
           </Typography>
