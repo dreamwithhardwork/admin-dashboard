@@ -1,0 +1,9 @@
+.formgroup  > *{
+    margin:40px 20px 10px 0px !important
+   }
+
+.model-form-container {
+    width: 50% !important;
+    min-width: 350px;
+    margin-top: 40px;
+}

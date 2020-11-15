@@ -12,7 +12,12 @@ const initialState = {
     },
     backdrop:false,
     toggleSidenav: false,
-    newBrandModel: false
+    newBrandModel: false,
+    brands:[],
+    activeBrand: "",
+    models:[],
+    activeModel:"",
+    activeVariant:""
 
 }
 
@@ -74,6 +79,19 @@ const rootReducer = (state = initialState, action) => {
     case ACTION_TYPES.NEW_BRAND_MODEL_CLOSE:
         newState.newBrandModel = false;
         break;
+    case ACTION_TYPES.SET_ACTIVE_BRAND:
+        newState.activeBrand = action.value;
+        newState.activeModel="";
+        break;
+    case ACTION_TYPES.ADD_BRANDS:
+        newState.brands = action.value;
+        break;
+    case ACTION_TYPES.ADD_MODELS:
+            newState.models = action.value;
+            break;
+    case ACTION_TYPES.SET_ACTIVE_MODEL:
+        newState.activeModel = action.value
+        
 
       default:
       break;

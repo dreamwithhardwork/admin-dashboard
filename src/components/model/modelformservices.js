@@ -10,11 +10,11 @@ export const handlePopularityChange = () => {
 
 }
 
-export const onUploadFiles = (event,setNewState,index) => {
+export const onUploadFiles = (event,setNewState,index,color) => {
   let files =  event.target.files;
   let images = []
   for(let i =0;i<files.length;i++){
-   images.push(files[i].name)
+   images.push(files[i])
   }
-  setNewState(index,images)
+  setNewState(index,color,images)
 }

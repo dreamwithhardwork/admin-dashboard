@@ -12,14 +12,17 @@ function MakeComponent() {
     setValue(newValue);
   };
   return (
-    <React.Fragment>
      <div className="makebody"> 
+     {/* this is to create makemodel component */}
       <div className="makemodel">
         <Make />
         <Divider />
         <Model />
         <Divider/>
       </div>
+
+
+      {/* this is to create model display component */}
       <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
         <div style={{ width: "100%" }}>
           <ModelDetails />
@@ -34,7 +37,6 @@ function MakeComponent() {
         </Paper>
       </div>
     </div>
-    </React.Fragment>
   )
 }
 

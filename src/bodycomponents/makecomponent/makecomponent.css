@@ -8,6 +8,7 @@
 
 .makebody {
     display: flex;
+    width: 100%;
 }
 
 

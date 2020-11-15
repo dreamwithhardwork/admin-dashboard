@@ -21,7 +21,11 @@ export const LOGIN_TYPE ={
     TOASTRESET:"TOASTRESET",
     SIDENAVBAR: "SIDENAVBAR",
     NEW_BRAND_MODEL_OPEN:"NEW_BRAND_MODEL_OPEN",
-    NEW_BRAND_MODEL_CLOSE:"NEW_BRAND_MODEL_CLOSE"
+    NEW_BRAND_MODEL_CLOSE:"NEW_BRAND_MODEL_CLOSE",
+    SET_ACTIVE_BRAND:"SET_ACTIVE_BRAND",
+    ADD_BRANDS:"ADD_BRANDS",
+    ADD_MODELS:"ADD_MODELS",
+    SET_ACTIVE_MODEL:"SET_ACTIVE_MODEL"
  }
 
 
@@ -39,6 +43,9 @@ export const LOGIN_TYPE ={
 
     GET_ALL_MAKES : process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/make/all?type=",
     ADD_NEW_MAKE: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/make/add",
-    DELETE_MAKE_BY_ID: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/make/delete?id="
+    DELETE_MAKE_BY_ID: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/make/delete?id=",
+
+    ADD_NEW_MODEL: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/model/add",
+    GET_ALL_MODEL: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/model?make="
 
  }

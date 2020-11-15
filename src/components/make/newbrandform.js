@@ -6,6 +6,7 @@ import BackDrop from '../messages/backdrop';
 import ToastMessage from '../messages/toastmessage';
 import {reducer,initialstate,Actions} from './reducer';
 import { connect } from 'react-redux';
+import { ACTION_TYPES } from '../constants/constants';
 
 
 function NewBrandModel(props) {
@@ -26,7 +27,6 @@ function NewBrandModel(props) {
 
   const hadleAddNewmake = async () => {
     localdispatch({type:Actions.SET_BACKDROP});
-    props.update({id:"jbjb",name:"hbh"});
     let newToastProps = {...toastProps};
     newToastProps.open = true;
     try{
@@ -35,7 +35,10 @@ function NewBrandModel(props) {
       if(response.status === 200){
        newToastProps.toastMessageSeverity="success";
        newToastProps.toastMessage ="new brand added successfully";
-       props.update(body);
+       let newBrands = [...props.brands];
+       newBrands.push(body);
+       props.dispatch({type:ACTION_TYPES.ADD_BRANDS,value:newBrands})
+       
       }
       else{
           newToastProps.toastMessage ="failed to add !!!";
@@ -107,7 +110,8 @@ const mapDispatchToProps = dispatch => {
   return {
     closeModel: () => {
       dispatch({type:Actions.NEW_BRAND_MODEL_CLOSE});
-    }
+    },
+    dispatch
   }
 }
 

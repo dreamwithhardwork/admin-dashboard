@@ -1,25 +1,31 @@
 import { Button, Paper, Card, CardActionArea, CardMedia, CardContent, Typography } from "@material-ui/core";
 import './modelstyle.css'
+import { connect } from "react-redux";
 
 const { default: Carousel } = require("react-material-ui-carousel");
 
-function ModelDetails() {
+function ModelDetails(props) {
+    const colors = props.activeModel.imagesWithColors === undefined?[]:Object.keys(props.activeModel.imagesWithColors);
+    console.log(colors)
     return (
 
-
+     props.activeModel===""?<div>Select a model</div>:
         <Card className="carosel">
             <CardActionArea style={{ display: "flex" }}>
-                <Carousel indicators={false} >
-                    <CardMedia component="img" image="https://stimg.cardekho.com/images/carexteriorimages/930x620/Kia/Seltos/6226/1580962193955/front-left-side-47.jpg"
-                        title="Contemplative Reptile" />
+                <Carousel animation="slide" autoPlay={true} indicators={true} >
+                    {
+                       colors.length>0? props.activeModel.imagesWithColors[colors[0]].map((item,key) =>  <CardMedia component="img" image={item} title="" />)
+                       :<CardMedia/>
+                    }
+                    
                 </Carousel>
             </CardActionArea>
             <CardContent style={{flexGrow:1}}>
                 <Typography gutterBottom variant="h5" component="h2">
-                    Kia Seltos
+                    {props.activeBrand+" "+props.activeModel.name} 
           </Typography>
                 <Typography variant="body2" color="textSecondary" component="p">
-                    The compact SUV is available in two trims: Tech Line and GT Line. The Tech Line is available in five
+                {props.activeModel.description.substring(0,70)}
           </Typography>
             </CardContent>
         </Card>
@@ -28,4 +34,12 @@ function ModelDetails() {
     )
 }
 
-export default ModelDetails
+const mapStateToProps = state => {
+    return{
+        ...state
+    }
+}
+
+
+
+export default connect(mapStateToProps,null)(ModelDetails);
