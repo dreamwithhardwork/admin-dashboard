@@ -38,6 +38,7 @@ function Make(props){
         let  n_makeList = await getAllBrands();
         console.log(props)
         props.dispatch({type:ACTION_TYPES.ADD_BRANDS,value:n_makeList});
+        if(n_makeList.length>0)
         setBrand(n_makeList[0].name,props.dispatch)
         //props.dispatch({type:ACTION_TYPES.SET_ACTIVE_BRAND,value:n_makeList[0].name})
         setFilterList(n_makeList);

@@ -28,13 +28,14 @@ function MakeComponent() {
           <ModelDetails />
         </div>
 
-        <Paper style={{ marginTop: "20px" }} square>
+       {/*  <Paper style={{ marginTop: "20px" }} square>
           <Tabs value={value} indicatorColor="primary" textColor="primary" onChange={handleChange} aria-label="disabled tabs example">
             <Tab label="Petrol Version" />
             <Tab label="Automatic Version" />
             <Tab label="Other" />
           </Tabs>
         </Paper>
+         */}
       </div>
     </div>
   )

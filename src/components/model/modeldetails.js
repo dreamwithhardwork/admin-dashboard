@@ -9,7 +9,9 @@ function ModelDetails(props) {
     console.log(colors)
     return (
 
-     props.activeModel===""?<div>Select a model</div>:
+    props.activeModel===""?<div style={{display:"flex",color:"red",justifyContent:"center",alignItems:"center",height:"80vh"}}>Add Models for selected <h3>
+        &nbsp;{props.activeBrand}.....
+        </h3> </div>:
         <Card className="card-root">
             <CardActionArea className="carosel-model">
                 <Carousel animation="slide" autoPlay={false} indicators={true} >

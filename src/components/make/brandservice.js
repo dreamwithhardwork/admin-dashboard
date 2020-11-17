@@ -41,5 +41,6 @@ export const setBrand = async (brandName,dispatch) => {
     let response = await fetch(SERVICE_URL.GET_ALL_MODEL+brandName,getRequest());
     let body = await response.json();
     dispatch({type:ACTION_TYPES.ADD_MODELS,value:body})
+    if(body.length > 0)
     dispatch({type:ACTION_TYPES.SET_ACTIVE_MODEL,value:body[0]})
 }

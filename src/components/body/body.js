@@ -2,6 +2,7 @@ import {Link, Switch, Route} from 'react-router-dom';
 import MakeComponent from '../../bodycomponents/makecomponent/makecomponent';
 import Make from '../make/make';
 import ModelForm from '../model/modelform';
+import AddVariant from '../variant/variantform';
 
 function Body() {
     return (
@@ -9,6 +10,7 @@ function Body() {
             <Switch>
                 <Route path="/make"> <MakeComponent/> </Route>
                 <Route path="/addModel"><ModelForm/></Route>
+                <Route path="/addVariant"><AddVariant/> </Route>
                 <Route path="*"><UnderConstruction /></Route>
             </Switch>
         </div>
