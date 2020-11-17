@@ -1,4 +1,4 @@
-import { Button, Paper, Card, CardActionArea, CardMedia, CardContent, Typography } from "@material-ui/core";
+import {  Card, CardActionArea, CardMedia, CardContent, Typography } from "@material-ui/core";
 import './modelstyle.css'
 import { connect } from "react-redux";
 
@@ -10,9 +10,9 @@ function ModelDetails(props) {
     return (
 
      props.activeModel===""?<div>Select a model</div>:
-        <Card className="carosel">
-            <CardActionArea style={{ display: "flex" }}>
-                <Carousel animation="slide" autoPlay={true} indicators={true} >
+        <Card className="card-root">
+            <CardActionArea className="carosel-model">
+                <Carousel animation="slide" autoPlay={false} indicators={true} >
                     {
                        colors.length>0? props.activeModel.imagesWithColors[colors[0]].map((item,key) =>  <CardMedia component="img" image={item} title="" />)
                        :<CardMedia/>
@@ -20,7 +20,7 @@ function ModelDetails(props) {
                     
                 </Carousel>
             </CardActionArea>
-            <CardContent style={{flexGrow:1}}>
+            <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
                     {props.activeBrand+" "+props.activeModel.name} 
           </Typography>

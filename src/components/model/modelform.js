@@ -142,12 +142,15 @@ function ModelForm(props) {
        props.dispatch({type:ACTION_TYPES.TOAST,toast:{
         open: true,
         severity: "success",
-        message:"new model saved successfully"
+        message:"new model "+body.name +" saved successfully"
         }})
         setDesc("");
         setName("");
         setsaveDisabled(true);
         setColors(initialState);
+        let newModels = [...props.models];
+        newModels.push(body);
+        props.dispatch({type:ACTION_TYPES.ADD_MODELS,value:newModels});
 
     }
 
@@ -163,11 +166,11 @@ function ModelForm(props) {
 
             <FormGroup className="formgroup">
                 <FormGroup row={true} style={{ display: "flex", justifyContent: "space-between" }}>
-                    <TextField onChange={handleNameChange} placeholder={"name*"}></TextField>
+                    <TextField onChange={handleNameChange} value={name} placeholder={"name*"}></TextField>
                     <TextField disabled value={props.activeBrand} placeholder={"make*"}></TextField>
-                    <FormControlLabel onChange={handlePopularityChange} labelPlacement="end" control={<Switch checked={popular} onChange={handleSwitchToggle} />} label="Popular" />
+                    <FormControlLabel onChange={handlePopularityChange}  labelPlacement="end" control={<Switch checked={popular} onChange={handleSwitchToggle} />} label="Popular" />
                 </FormGroup>
-                <TextField rowsMax={8} onChange={handleDescriptionChange} multiline rows={3} placeholder={"description*"} />
+                <TextField rowsMax={8} onChange={handleDescriptionChange} value={desc} multiline rows={3} placeholder={"description*"} />
             </FormGroup>
 
             {

@@ -4,7 +4,7 @@ import Brand from './brand';
 import { Paper } from '@material-ui/core';
 import React, { useState } from 'react';
 import NewBrandModel from './newbrandform';
-import {getAllBrands} from './brandservice';
+import {getAllBrands,setBrand} from './brandservice';
 import { connect } from 'react-redux';
 import { ACTION_TYPES } from '../constants/constants';
 
@@ -38,6 +38,7 @@ function Make(props){
         let  n_makeList = await getAllBrands();
         console.log(props)
         props.dispatch({type:ACTION_TYPES.ADD_BRANDS,value:n_makeList});
+        setBrand(n_makeList[0].name,props.dispatch)
         //props.dispatch({type:ACTION_TYPES.SET_ACTIVE_BRAND,value:n_makeList[0].name})
         setFilterList(n_makeList);
     },[])

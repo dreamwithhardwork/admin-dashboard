@@ -11,6 +11,13 @@
     width: 100%;
 }
 
+.modeldetails-root {
+   display: flex;
+   flex-direction: column;
+   width: 60%;
+   margin: 10px 10px 0px 10px;
+}
+
 
 @media screen and (max-width: 720px){
     .makebody {
@@ -24,4 +31,11 @@
         flex-direction: column;
         overflow: inherit;
     }
+
+    .modeldetails-root {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin: 0px;
+     }
 }

@@ -33,7 +33,7 @@ function Model(props){
     return(
         <Paper elevation={0} className="modelroot">
             <AutoRideToolBar type={props.activeBrand.toLocaleUpperCase()} filter={handleFilter}/>
-            <div style={{display:"flex"}}>
+            <div className="makelist">
            {
                filter?filterList.map((model) => {
                 return(

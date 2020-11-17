@@ -23,7 +23,7 @@ function MakeComponent() {
 
 
       {/* this is to create model display component */}
-      <div style={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
+      <div className="modeldetails-root">
         <div style={{ width: "100%" }}>
           <ModelDetails />
         </div>

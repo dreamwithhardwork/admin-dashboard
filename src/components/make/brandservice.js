@@ -1,4 +1,4 @@
-import {SERVICE_URL} from '../constants/constants';
+import {SERVICE_URL,ACTION_TYPES} from '../constants/constants';
 import {getRequest,postRequest,payloads} from '../constants/headers';
 
 export const getAllBrands = async () => {
@@ -34,4 +34,12 @@ export const uploadLogo = async (file) => {
         });
         let body = await res.json();
         return body;
+}
+
+export const setBrand = async (brandName,dispatch) => {
+    dispatch({type:ACTION_TYPES.SET_ACTIVE_BRAND,value:brandName})
+    let response = await fetch(SERVICE_URL.GET_ALL_MODEL+brandName,getRequest());
+    let body = await response.json();
+    dispatch({type:ACTION_TYPES.ADD_MODELS,value:body})
+    dispatch({type:ACTION_TYPES.SET_ACTIVE_MODEL,value:body[0]})
 }
