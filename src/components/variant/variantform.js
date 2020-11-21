@@ -3,6 +3,7 @@ import { Container, TextField, FormGroup, FormControlLabel, DialogTitle, Divider
 import { ArrowBack } from "@material-ui/icons"
 import { useHistory } from "react-router-dom"
 import './variantform.css'
+import CarSpecifications from "./carspecifications"
 
 function AddVariant(props){
 
@@ -56,10 +57,11 @@ function AddVariant(props){
                
             </FormGroup>
 
-
+         <Divider/>
+         <FormGroup style={{marginTop:"20px"}} className="variant-form-group variant-row">
             
-            
-
+            <CarSpecifications/>
+            </FormGroup>
 
         </Container>
     )

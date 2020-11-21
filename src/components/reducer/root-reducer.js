@@ -17,8 +17,15 @@ const initialState = {
     activeBrand: "",
     models:[],
     activeModel:"",
-    activeVariant:""
-
+    activeVariant:"",
+    activeCarProperty:"",
+    carProperties: {
+        engine:[
+            {name:"Engine Type", propertyDataType:"STRING"},
+            {name:"Fast Charging", propertyDataType:"BOOLEAN"}
+        ],
+        fuel:[]
+    }
 }
 
 const setInitialState = () =>{
@@ -63,7 +70,6 @@ const rootReducer = (state = initialState, action) => {
         break;
 
     case ACTION_TYPES.OPEN_BACKDROP:
-        console.log("back droppp");
         newState.backdrop = true;
     break;
 
@@ -87,10 +93,18 @@ const rootReducer = (state = initialState, action) => {
         newState.brands = action.value;
         break;
     case ACTION_TYPES.ADD_MODELS:
-            newState.models = action.value;
-            break;
+        newState.models = action.value;
+        break;
     case ACTION_TYPES.SET_ACTIVE_MODEL:
-        newState.activeModel = action.value
+        newState.activeModel = action.value;
+        break;
+    case ACTION_TYPES.SET_ACTIVE_CAR_PROPERTY:
+        newState.activeCarProperty = action.value;
+        break;
+    case ACTION_TYPES.SET_CAR_PROPERTIES:
+        newState.carProperties = action.value;
+        break;
+
         
 
       default:

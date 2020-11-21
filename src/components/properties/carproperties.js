@@ -1,103 +1,87 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
+import React, { useState } from 'react';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import TabPanel from './tabpanel'
+import { Add, Edit, Save, Done, Clear, Delete } from '@material-ui/icons';
+import { makeStyles, Divider, TextField, Button, Input, InputAdornment, IconButton, FormControlLabel } from '@material-ui/core';
+import { connect } from 'react-redux';
+import {initialState,reducer, ACTION_LOCAL_TYPES} from './reducer';
+import {addNewCarProperty} from './carpropertiesservices';
 
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
 
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`scrollable-auto-tabpanel-${index}`}
-      aria-labelledby={`scrollable-auto-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `scrollable-auto-tab-${index}`,
-    'aria-controls': `scrollable-auto-tabpanel-${index}`,
-  };
-}
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    width: '100%',
     backgroundColor: theme.palette.background.paper,
+    display: 'flex'
   },
+  tabs: {
+    borderRight: `1px solid ${theme.palette.divider}`,
+    
+  },
+  wrapper: {
+    display: 'flex',
+    flexDirection: 'row-reverse',
+    justifyContent: 'space-between'
+    
+  }
 }));
 
-export default function ScrollableTabsButtonAuto() {
+function CarProperties(props) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
+  const[activeSpec,setActiveSpec] = useState([]);
+  const[activeLabel,setActiveLabel] = useState([]);
+  const[localState, localDispatch] = React.useReducer(reducer,initialState);
+   
+  const handleActiveSpec = (label) => {
+    setActiveSpec(props.carProperties[label]);
+    setActiveLabel(label)
+  }
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="default">
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          indicatorColor="primary"
-          textColor="primary"
-          variant="scrollable"
-          scrollButtons="auto"
-          aria-label="scrollable auto tabs example"
-        >
-          <Tab label="Item One" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
-          <Tab label="Item Four" {...a11yProps(3)} />
-          <Tab label="Item Five" {...a11yProps(4)} />
-          <Tab label="Item Six" {...a11yProps(5)} />
-          <Tab label="Item Seven" {...a11yProps(6)} />
-        </Tabs>
-      </AppBar>
-      <TabPanel value={value} index={0}>
-        Item One
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Item Two
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        Item Four
-      </TabPanel>
-      <TabPanel value={value} index={4}>
-        Item Five
-      </TabPanel>
-      <TabPanel value={value} index={5}>
-        Item Six
-      </TabPanel>
-      <TabPanel value={value} index={6}>
-        Item Seven
+      <Tabs
+        orientation="vertical"
+        variant="scrollable"
+        aria-label="Vertical tabs example"
+        indicatorColor="primary"
+        className={classes.tabs}>
+          {
+            [
+            Object.keys(props.carProperties).map(label => {
+              return <React.Fragment><Tab  classes={{wrapper: classes.wrapper}} icon={[<Edit />]} aria-controls="simple-tabpanel" onClick={() => handleActiveSpec(label)} label ={label}/>
+              <Divider/></React.Fragment>
+            })]
+          }
+          <Tab disableRipple style={{display:"flex", color:"green"}} icon={<Input value={localState.newCarProp} onChange={(e)=>localDispatch({type:ACTION_LOCAL_TYPES.CAR_PROP_CHANGE,value:e.target.value})}
+           variant="filled" placeholder="add new*" endAdornment={<InputAdornment position="end" > 
+             <FormControlLabel control={<Clear/>}></FormControlLabel> <FormControlLabel control={<Done/>}></FormControlLabel>
+             <FormControlLabel control={<Delete/>}></FormControlLabel>
+           </InputAdornment>} />}></Tab>
+            <Divider/>
+         <Tab classes={{wrapper: classes.wrapper}} wrapped={true} onClick={() => {addNewCarProperty(props,localState.newCarProp);localDispatch({type:ACTION_LOCAL_TYPES.CAR_PROP_RESET})}} 
+         label="Add" style={{display:"flex"}} icon={<Add/>}>
+        </Tab>
+        <Divider/>
+      </Tabs>
+       <TabPanel style={{display:"flex"}} label={activeLabel} data={activeSpec}>
       </TabPanel>
     </div>
   );
 }
+
+
+
+const mapStateToProps = state => {
+  return {
+    ...state
+  }
+}
+
+const mapDispatcherToProps = dispatch => {
+  return {
+    dispatch
+  }
+}
+
+export default connect(mapStateToProps,mapDispatcherToProps)(CarProperties);

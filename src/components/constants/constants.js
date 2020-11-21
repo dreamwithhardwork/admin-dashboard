@@ -25,7 +25,10 @@ export const LOGIN_TYPE ={
     SET_ACTIVE_BRAND:"SET_ACTIVE_BRAND",
     ADD_BRANDS:"ADD_BRANDS",
     ADD_MODELS:"ADD_MODELS",
-    SET_ACTIVE_MODEL:"SET_ACTIVE_MODEL"
+    SET_ACTIVE_MODEL:"SET_ACTIVE_MODEL",
+    SET_ACTIVE_CAR_PROPERTY:"SET_ACTIVE_CAR_PROPERTY",
+    SET_CAR_PROPERTIES:"SET_CAR_PROPERTIES",
+    UPDATE_CAR_PROPERTIES:"UPDATE_CAR_PROPERTIES"
  }
 
 
@@ -46,6 +49,9 @@ export const LOGIN_TYPE ={
     DELETE_MAKE_BY_ID: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/make/delete?id=",
 
     ADD_NEW_MODEL: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/model/add",
-    GET_ALL_MODEL: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/model?make="
+    GET_ALL_MODEL: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/model?make=",
+
+    GET_CAR_PROPERTIES: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/properties/get/car",
+    ADD_CAR_PROPERTIES: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/properties/add/car"
 
  }

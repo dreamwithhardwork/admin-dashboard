@@ -3,6 +3,7 @@ import MakeComponent from '../../bodycomponents/makecomponent/makecomponent';
 import Make from '../make/make';
 import ModelForm from '../model/modelform';
 import AddVariant from '../variant/variantform';
+import CarProperties from '../properties-v1/carproperties';
 
 function Body() {
     return (
@@ -11,6 +12,7 @@ function Body() {
                 <Route path="/make"> <MakeComponent/> </Route>
                 <Route path="/addModel"><ModelForm/></Route>
                 <Route path="/addVariant"><AddVariant/> </Route>
+                <Route path="/carProperties"> <CarProperties/> </Route>
                 <Route path="*"><UnderConstruction /></Route>
             </Switch>
         </div>
