@@ -2,12 +2,22 @@ import {useStyles} from './carspecificationstyle'
 import { Tabs, Tab, Divider, Input, InputAdornment, FormControlLabel } from '@material-ui/core';
 import { connect } from 'react-redux';
 import CarSpecificationType from './carspecificationtype';
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Add } from '@material-ui/icons';
 import TabPanel from '../properties-v1/tabpanel';
+import { ACTION_TYPES } from '../constants/constants';
+import {saveProperties,getProperties} from './carpropertiesservices';
 
 function CarProperties(props) {
     const classes = useStyles();
+
+    useEffect( async () => {
+        let body = await getProperties();
+        if(body.length === 0)
+        return;
+        props.dispatch({type:ACTION_TYPES.SET_CAR_PROPERTIES,value:body[0].availableProps})
+    },[])
+
     return(
         <div className={classes.root}>
                <Tabs orientation="vertical" variant="scrollable">
@@ -16,7 +26,7 @@ function CarProperties(props) {
                            return <React.Fragment><CarSpecificationType key={index} data={item} /><Divider/></React.Fragment>
                        })
                    }
-                   <AddNew/>
+                   <AddNew {...props}/>
                    <Divider/>
                </Tabs>
                <TabPanel />
@@ -33,6 +43,9 @@ function AddNew(props){
 
     const handleAddNewType = () => {
       setValue("")
+      let newCarProps = {...props.carProperties}
+      newCarProps[value] = [];
+      props.dispatch({type:ACTION_TYPES.SET_CAR_PROPERTIES,value:newCarProps})
     }
     return(
         <Tab disableRipple classes={{wrapper: classes.wrapper}} 

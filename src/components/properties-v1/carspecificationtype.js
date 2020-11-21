@@ -10,7 +10,8 @@ function CarSpecificationType(props){
 
     const classes = useStyles()
     const[edit,setEdit] = useState(false);
-    const handleActiveTabPanel = () => {
+    const handleActiveTabPanel = (e) => {
+       if(!e.isDefaultPrevented())
        props.dispatch({type:ACTION_TYPES.SET_ACTIVE_CAR_PROPERTY,value:props.data})
     }
     return(
@@ -23,16 +24,31 @@ function EditComponent(props){
 
     const[value,setvalue] = useState(props.data);
     
-    const handleClearPropertyName = () => {
+    const handleClearPropertyName = (e) => {
+      e.preventDefault();
       props.edit(false)
     }
 
-    const handleSavePropertyName = () => {
+    const handleSavePropertyName = (e) => {
+        e.preventDefault();
+        let newCarProperty =  {...props.carProperties}
+        let subdata = [...newCarProperty[props.data]];
+        delete newCarProperty[props.data];
+         newCarProperty[value] = subdata;
+         props.dispatch({type:ACTION_TYPES.SET_ACTIVE_CAR_PROPERTY,value:value})
+         props.dispatch({type:ACTION_TYPES.SET_CAR_PROPERTIES,value:newCarProperty})
+        props.edit(false)
          
     }
 
-    const handleDeletePropertyName = () => {
-
+    const handleDeletePropertyName = (e) => {
+        e.preventDefault();
+        let newCarProps = {...props.carProperties}
+        delete newCarProps[props.activeCarProperty];
+        let keys = Object.keys(newCarProps);
+        let activeCarProperty = keys[0] === undefined ? "":keys[0];
+        props.dispatch({type:ACTION_TYPES.SET_ACTIVE_CAR_PROPERTY,value:activeCarProperty});
+        props.dispatch({type:ACTION_TYPES.SET_CAR_PROPERTIES,value:newCarProps})
     }
 
     const handlevalueChange = (event) => {

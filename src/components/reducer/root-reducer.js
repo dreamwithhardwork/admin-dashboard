@@ -19,13 +19,7 @@ const initialState = {
     activeModel:"",
     activeVariant:"",
     activeCarProperty:"",
-    carProperties: {
-        engine:[
-            {name:"Engine Type", propertyDataType:"STRING"},
-            {name:"Fast Charging", propertyDataType:"BOOLEAN"}
-        ],
-        fuel:[]
-    }
+    carProperties: {}
 }
 
 const setInitialState = () =>{
