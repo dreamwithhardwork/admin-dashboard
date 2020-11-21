@@ -19,7 +19,8 @@ const initialState = {
     activeModel:"",
     activeVariant:"",
     activeCarProperty:"",
-    carProperties: {}
+    carProperties: {},
+    carPropertiesId:""
 }
 
 const setInitialState = () =>{
@@ -98,7 +99,9 @@ const rootReducer = (state = initialState, action) => {
     case ACTION_TYPES.SET_CAR_PROPERTIES:
         newState.carProperties = action.value;
         break;
-
+    case ACTION_TYPES.SET_CAR_PROPERTIES_ID:
+        newState.carPropertiesId = action.value;
+        break;
         
 
       default:

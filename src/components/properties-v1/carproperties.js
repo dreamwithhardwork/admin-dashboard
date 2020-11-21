@@ -15,12 +15,15 @@ function CarProperties(props) {
         let body = await getProperties();
         if(body.length === 0)
         return;
+        console.log(body);
+        props.dispatch({type:ACTION_TYPES.SET_CAR_PROPERTIES_ID,value:body[0].id})
         props.dispatch({type:ACTION_TYPES.SET_CAR_PROPERTIES,value:body[0].availableProps})
     },[])
 
     return(
         <div className={classes.root}>
                <Tabs orientation="vertical" variant="scrollable">
+                   <Divider/>
                    {
                        Object.keys(props.carProperties).map((item,index) => {
                            return <React.Fragment><CarSpecificationType key={index} data={item} /><Divider/></React.Fragment>
@@ -34,14 +37,13 @@ function CarProperties(props) {
     )
 }
 
-function AddNew(props){
-    const classes = useStyles();
-    const[value,setValue] = useState("");
-    const handleChangeValue = (e) => {
+   function AddNew(props){
+     const classes = useStyles();
+     const[value,setValue] = useState("");
+     const handleChangeValue = (e) => {
            setValue(e.target.value);
-    }
-
-    const handleAddNewType = () => {
+        }
+     const handleAddNewType = () => {
       setValue("")
       let newCarProps = {...props.carProperties}
       newCarProps[value] = [];

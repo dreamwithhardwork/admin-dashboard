@@ -10,8 +10,18 @@ const { Container, DialogTitle, Divider, FormGroup, TextField, MenuItem, FormCon
 function TabPanel(props){
 
 
-    const handleSave = () => {
-        saveProperties({availableProps:props.carProperties})
+    const handleSave = async () => {
+        debugger;
+        const payload =  {
+            availableProps:props.carProperties
+        }
+        if(props.carPropertiesId!==""){
+            payload.id = props.carPropertiesId;
+        }
+        let body =  await saveProperties(payload);
+        console.log(body);
+        props.dispatch({type:ACTION_TYPES.SET_CAR_PROPERTIES_ID,value:body.id})
+        props.dispatch({type:ACTION_TYPES.SET_CAR_PROPERTIES,value:body.availableProps})
     }
 
     useEffect(() => {
