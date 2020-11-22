@@ -11,7 +11,7 @@ function AddVariant(props){
 
     return(
         <Container>
-            <FormGroup >
+            <FormGroup className="variant-form-group variant-row">
                 <FormControlLabel label="&nbsp;&nbsp;&nbsp;Back" control={<ArrowBack onClick={() => history.push("/make")} />}></FormControlLabel>
             </FormGroup>
             <DialogTitle>Add new variant</DialogTitle>

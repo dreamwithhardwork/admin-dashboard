@@ -3,6 +3,7 @@ import Model from "../../components/model/model";
 import Make from "../../components/make/make";
 import React from 'react'
 import ModelDetails from "../../components/model/modeldetails";
+import VariantList from "../../components/variant/variants";
 import '../makecomponent/makecomponent.css';
 import { Add } from "@material-ui/icons";
 
@@ -28,15 +29,7 @@ function MakeComponent() {
         <div style={{ width: "100%" }}>
           <ModelDetails />
         </div>
-
-        <Paper style={{ marginTop: "20px" }} square>
-          <Tabs value={value} indicatorColor="primary" textColor="primary" onChange={handleChange} aria-label="disabled tabs example">
-            <Tab label="Petrol Version" />
-            <Tab label="Automatic Version" />
-            <Tab label="Other" />
-            <Tab icon={<Add/>} />
-          </Tabs>
-        </Paper>
+        <VariantList/>
       </div>
     </div>
   )
