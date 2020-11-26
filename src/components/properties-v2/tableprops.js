@@ -14,7 +14,7 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import { forwardRef } from 'react';
-import {saveProperties,getProperties} from './carpropertiesservices';
+import {saveProperties, deleteProperty} from './carpropertiesservices';
 export const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
     Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
@@ -53,7 +53,6 @@ export const tableIcons = {
   export const updateRow = (updated,olddata,rows,setRows) => {
     return new Promise(async (res,rej) => {
         await saveProperties(updated)
-        debugger;
         let index = olddata.tableData.id;
         let updatedData = [...rows];
         updatedData.splice(index,1,updated)
@@ -63,8 +62,9 @@ export const tableIcons = {
   }
 
   export const deleteRow = (deletedRow,rows,setRows) => {
-    return new Promise((res,rej) => {
+    return new Promise(async (res,rej) => {
         console.log(deletedRow)
+        await deleteProperty(deletedRow.id)
         let index = deletedRow.tableData.id;
         let updatedData = [...rows];
         updatedData.splice(index,1)
@@ -78,10 +78,10 @@ export const tableIcons = {
 
   export const addSpecificationRow = (newRow,rows,setRows,row) => {
     return new Promise( async (res,rej) => {
-        debugger;
         let index = row.tableData.id;
         let newrow = {...row}
         newrow.properties.push(newRow);
+        await saveProperties(newrow);
         let newRows = [...rows];
         newRows.splice(index,1,newrow)
         setRows(newRows)
@@ -89,20 +89,35 @@ export const tableIcons = {
       })
   }
 
-  export const updateSpecificationRow = (updated,olddata,rows,setRows) => {
+  export const updateSpecificationRow = (updated,olddata,rows,setRows,row) => {
     return new Promise(async (res,rej) => {
-        console.log("updating ")
+        debugger;
+        let index = row.tableData.id;
+        let indexSub = olddata.tableData.id;
+
+        let newRow = {...row};
+        newRow.properties.splice(indexSub,1,updated);
+        await saveProperties(newRow);
+
+        let newRows = [...rows];
+        newRows.splice(index,1,newRow);
+        setRows(newRows);
         res();
     })
   }
 
-  export const deleteSpecificationRow = (deletedRow,rows,setRows) => {
-    return new Promise((res,rej) => {
-        console.log(deletedRow)
-        let index = deletedRow.tableData.id;
-        let updatedData = [...rows];
-        updatedData.splice(index,1)
-        setRows(updatedData)
+  export const deleteSpecificationRow = (deletedRow,rows,setRows,row) => {
+    return new Promise(async (res,rej) => {
+        let index = row.tableData.id;
+        let indexSub = deletedRow.tableData.id;
+
+        let newRow = {...row};
+        newRow.properties.splice(indexSub,1);
+        await saveProperties(newRow);
+
+        let newRows = [...rows];
+        newRows.splice(index,1,newRow);
+        setRows(newRows);
         res();
     })
   }

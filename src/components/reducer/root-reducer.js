@@ -42,10 +42,22 @@ const setInitialState = () =>{
   {
       return;
   }
-  let valid = validateJwt(jwt);
+  let valid  =false;
+  try{
+    valid = validateJwt(jwt);
+  }
+  catch (ex){
+      valid = false;
+  }
   if(valid){
       initialState.login = true;
       initialState.userDetails = getUserDetails();
+  }
+  else{
+      initialState.login = false;
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      localStorage.removeItem("userDetails");
   }
 }
 

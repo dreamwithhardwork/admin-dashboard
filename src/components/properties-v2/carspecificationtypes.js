@@ -1,7 +1,7 @@
 import {TextField, MenuItem } from '@material-ui/core';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import {tableIcons, addSpecificationRow, updateSpecificationRow} from './tableprops';
+import {tableIcons, addSpecificationRow, updateSpecificationRow, deleteSpecificationRow} from './tableprops';
 import {getProperties} from './carpropertiesservices';
 import MaterialTable from 'material-table';
 
@@ -16,7 +16,7 @@ function CarSpecificationTypes(props){
             {
                 onRowAdd: newRow => addSpecificationRow(newRow,props.rows,props.setRows,props.row),
                 onRowUpdate: (newRow,oldRow) => updateSpecificationRow(newRow,oldRow,props.rows,props.setRows,props.row),
-                onRowDelete: delRow => console.log(delRow)
+                onRowDelete: delRow => deleteSpecificationRow(delRow,props.rows,props.setRows,props.row)
             }
         }
         columns={

@@ -1,4 +1,4 @@
-import {getRequest,postRequest} from '../constants/headers';
+import {getRequest,postRequest, deleteRequest} from '../constants/headers';
 import {ACTION_TYPES,SERVICE_URL} from '../constants/constants';
 
 
@@ -16,6 +16,11 @@ export const getProperties = async () => {
   let response = await fetch(url,getRequest());
   let body = await response.json();
   return body;
+}
+
+export const deleteProperty = async (id) => {
+  let url = SERVICE_URL.DELETE_CAR_PROPERTY+id;
+  let response = await fetch(url, deleteRequest());
 }
 
 
