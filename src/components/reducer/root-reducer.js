@@ -20,7 +20,20 @@ const initialState = {
     activeVariant:"",
     activeCarProperty:"",
     carProperties: {},
-    carPropertiesId:""
+    carPropertiesId:"",
+    variant:{
+        bodyType: "",
+        description: "",
+        fromYear: 2019,
+        fuelType: "PETROL",
+        model: "",
+        specifications:{
+            availableProps:{}
+        },
+        toYear: 2020,
+        transmission: "AUTOMATIC",
+        variantName: ""
+      }
 }
 
 const setInitialState = () =>{
@@ -50,9 +63,9 @@ const rootReducer = (state = initialState, action) => {
           newState.userDetails = getUserDetails();
          break;
      case ACTION_TYPES.LOGOUT:
-            newState.login = false;
-            newState.userDetails = {};
-            localStorage.removeItem("token");
+          newState.login = false;
+          newState.userDetails = {};
+          localStorage.removeItem("token");
      break;
 
      case ACTION_TYPES.TOAST:
@@ -101,6 +114,9 @@ const rootReducer = (state = initialState, action) => {
         break;
     case ACTION_TYPES.SET_CAR_PROPERTIES_ID:
         newState.carPropertiesId = action.value;
+        break;
+    case ACTION_TYPES.SET_VARIANT:
+        newState.variant = action.value
         break;
         
 

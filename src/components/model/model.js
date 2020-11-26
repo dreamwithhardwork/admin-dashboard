@@ -1,6 +1,6 @@
 import { Paper, Chip, Avatar } from "@material-ui/core";
 import './modelstyle.css';
-import { Done } from "@material-ui/icons";
+import { Done, Edit } from "@material-ui/icons";
 import AutoRideToolBar from '../make/toolbar';
 import React, { useState } from "react";
 import { connect } from "react-redux";
@@ -26,6 +26,10 @@ function Model(props){
          props.dispatch({type:ACTION_TYPES.SET_ACTIVE_MODEL,value:model})
     }
 
+    const handleEdit = (model) => {
+       console.log(model)
+    }
+
     
 
 
@@ -37,16 +41,18 @@ function Model(props){
            {
                filter?filterList.map((model) => {
                 return(
-                <Chip onClick={()=>handleModelDispaly(model)} size="medium" style={{width:"fit-content", margin:"10px",paddingRight:"20px"}} key={model.id} avatar={<Avatar>{model.name.charAt(0).toLocaleUpperCase()}</Avatar>} label={model.name}
-                clickable color="default"
-                deleteIcon={<Done />}></Chip>
+                <Chip onClick={()=>handleModelDispaly(model)} size="medium" style={{width:"fit-content", margin:"10px",paddingRight:"20px"}} key={model.id} 
+                avatar={<Avatar>{model.name.charAt(0).toLocaleUpperCase()}</Avatar>} label={model.name}
+                clickable color="default" onDelete={()=>handleEdit(model)}
+                deleteIcon={<Edit />}></Chip>
                 )
                }):
                props.models.map((model) => {
                 return(
-                <Chip onClick={()=>handleModelDispaly(model)} size="medium" style={{width:"fit-content", margin:"10px",paddingRight:"20px"}} key={model.id} avatar={<Avatar>{model.name.charAt(0).toLocaleUpperCase()}</Avatar>} label={model.name}
-                clickable color="default"
-                deleteIcon={<Done />}></Chip>
+                <Chip onClick={()=>handleModelDispaly(model)} size="medium" style={{width:"fit-content", margin:"10px",paddingRight:"20px"}} key={model.id} 
+                avatar={<Avatar>{model.name.charAt(0).toLocaleUpperCase()}</Avatar>} label={model.name}
+                clickable color="default" onDelete={()=>handleEdit(model)}
+                deleteIcon={<Edit />}></Chip>
                 )
                })
             

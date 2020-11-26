@@ -7,12 +7,14 @@ import NewBrandModel from './newbrandform';
 import {getAllBrands,setBrand} from './brandservice';
 import { connect } from 'react-redux';
 import { ACTION_TYPES } from '../constants/constants';
+import { useRef } from 'react';
 
 function Make(props){
 
     const [makeList,setMakeList] = useState([]);
     const [filterList, setFilterList] = useState([]);
     const [filter, setFilter] = useState(false);
+    const [tableView, setTableView] = useState(true)
 
     const updateBrands = (newBrand) => {
         let newMakeList = [...makeList]
@@ -44,7 +46,7 @@ function Make(props){
         setFilterList(n_makeList);
     },[])
 
-
+    const ref = useRef()
 
 
     return(

@@ -14,7 +14,7 @@ function ModelDetails(props) {
         </h3> </div>:
         <Card className="card-root">
             <CardActionArea className="carosel-model">
-                <Carousel animation="slide" autoPlay={false} indicators={true} >
+                <Carousel animation="slide"  autoPlay={true} indicators={false} >
                     {
                        colors.length>0? props.activeModel.imagesWithColors[colors[0]].map((item,key) =>  <CardMedia component="img" image={item} title="" />)
                        :<CardMedia/>

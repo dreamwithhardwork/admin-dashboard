@@ -193,8 +193,7 @@ function ModelForm(props) {
 }
 
 
-
-function ImagesComponent(props) {
+ function ImagesComponent(props) {
 
     const colors = ["White", "Silver", "Black", "Grey", "Blue", "Red", "Brown", "Yellow", "Green"]
 

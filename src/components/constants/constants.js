@@ -29,7 +29,8 @@ export const LOGIN_TYPE ={
     SET_ACTIVE_CAR_PROPERTY:"SET_ACTIVE_CAR_PROPERTY",
     SET_CAR_PROPERTIES:"SET_CAR_PROPERTIES",
     UPDATE_CAR_PROPERTIES:"UPDATE_CAR_PROPERTIES",
-    SET_CAR_PROPERTIES_ID:"SET_CAR_PROPERTIES_ID"
+    SET_CAR_PROPERTIES_ID:"SET_CAR_PROPERTIES_ID",
+    SET_VARIANT:"SET_VARIANT"
  }
 
 
@@ -53,6 +54,9 @@ export const LOGIN_TYPE ={
     GET_ALL_MODEL: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/model?make=",
 
     GET_CAR_PROPERTIES: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/properties/get/car",
-    ADD_CAR_PROPERTIES: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/properties/add/car"
+    ADD_CAR_PROPERTIES: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/properties/add/car",
+
+    GET_VARIANT_BY_MODEL: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/variant/get/",
+    ADD_VARIANT: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/variant/add"
 
  }
