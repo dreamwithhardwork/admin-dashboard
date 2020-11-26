@@ -110,11 +110,9 @@ export const tableIcons = {
     return new Promise(async (res,rej) => {
         let index = row.tableData.id;
         let indexSub = deletedRow.tableData.id;
-
         let newRow = {...row};
         newRow.properties.splice(indexSub,1);
         await saveProperties(newRow);
-
         let newRows = [...rows];
         newRows.splice(index,1,newRow);
         setRows(newRows);

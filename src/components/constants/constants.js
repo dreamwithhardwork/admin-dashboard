@@ -40,11 +40,14 @@ export const LOGIN_TYPE ={
     OTP_MOBILE: process.env.REACT_APP_LOGIN_OTP+"/api/v1/otp/send/text/",
     OTP_EMAIL: process.env.REACT_APP_LOGIN_OTP+"/api/v1/otp/send/email/",
     LOGIN: process.env.REACT_APP_LOGIN_OTP+"/api/v1/user/login",
-    SIGNUP: process.env.REACT_APP_LOGIN_OTP+"/api/v1/user/signup" ,
+    SIGNUP: process.env.REACT_APP_LOGIN_OTP+"/api/v1/user/signup",
+    NOTIFY:process.env.REACT_APP_LOGIN_OTP+"/api/v1/notification/notify",
 
     GET_REGISTERED_USER_BY_MOBILE: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/registered/users/mobile/",
-    GET_REGISTERED_USER_BY_EMAIL: process.env.REACT_APP_USER_DETAILS+"/api/v1/admin/registered/users/email/",
-    GET_ALL_USERS: process.env.REACT_APP_USER_DETAILS+"/api/v1/admin/registered/users/all",
+    GET_REGISTERED_USER_BY_EMAIL: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/registered/users/email/",
+    GET_ALL_USERS: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/registered/users/all",
+    DELETE_USER:process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/registered/users/delete/id/",
+    ADD_USER:process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/registered/users/add",
 
     GET_ALL_MAKES : process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/make/all?type=",
     ADD_NEW_MAKE: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/make/add",
@@ -58,6 +61,9 @@ export const LOGIN_TYPE ={
     DELETE_CAR_PROPERTY: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/properties/delete?id=",
 
     GET_VARIANT_BY_MODEL: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/variant/get/",
-    ADD_VARIANT: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/variant/add"
+    ADD_VARIANT: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/variant/add",
+
+
+
 
  }

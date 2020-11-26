@@ -6,63 +6,25 @@ import './variantform.css';
 import { useState } from "react";
 import { ACTION_TYPES } from "../constants/constants";
 import UploadImageComponent from "./uploadimage";
+import {handleYearChange,handleBodyTypeChanges,handleDescchange,handleNameChange,handlePriceChange,handleTypeChange,handleTransmissionChange,saveVariantAndForward} from './variantservice'
 
 function AddVariant(props){
 
     const history = useHistory();
-    const [name,setName] = useState("");
-    const [year, setYear] = useState("");
-    const [type, setType] = useState("PETROL");
-    const [desc, setDesc] = useState("");
-    const [bodyType, setBodyType] = useState("HATCHBACK");
-    const [transmission,setTransmission] = useState("AUTOMATIC");
-    const [price, setPrice] = useState("");
+    const initialVariant = {
+        name:"",
+        year:0,
+        type:"PETROL",
+        desc:"",
+        bodyType:"HATCHBACK",
+        transmission:"",
+        price:0.0,
+        externalImages:{},
+        internalImages:{}
+    }
+    const[variant,setVariant] = useState(initialVariant);
+    
 
-    const handleNameChange = (e) => {
-        setName(e.target.value)
-        let newVariant = {...props.variant}
-        newVariant.variantName = e.target.value;
-        props.dispatch({type:ACTION_TYPES.SET_VARIANT,value:newVariant});
-    }
-    
-     const handleYearChange = (e) => {
-       setYear(e.target.value);
-       let newVariant = {...props.variant}
-        newVariant.fromYear = e.target.value;
-        props.dispatch({type:ACTION_TYPES.SET_VARIANT,value:newVariant});
-    }
-    
-     const handleTypeChange = (e) => {
-        setType(e.target.value)
-        let newVariant = {...props.variant}
-        newVariant.bodyType = e.target.value;
-        props.dispatch({type:ACTION_TYPES.SET_VARIANT,value:newVariant});
-    }
-    
-     const handleDescchange = (e) => {
-       setDesc(e.target.value)
-       let newVariant = {...props.variant}
-        newVariant.description = e.target.value;
-        props.dispatch({type:ACTION_TYPES.SET_VARIANT,value:newVariant});
-    }
-    
-     const handleBodyTypeChanges = (e) => {
-       setBodyType(e.target.value)
-       let newVariant = {...props.variant}
-        newVariant.bodyType = e.target.value;
-        props.dispatch({type:ACTION_TYPES.SET_VARIANT,value:newVariant});
-    }
-
-    
-     const handlePriceChange = (e) => {
-       setPrice(e.target.value)
-    }
-    const handleTransmissionChange = (e) => {
-        setTransmission(e.target.value)
-        let newVariant = {...props.variant}
-        newVariant.transmission = e.target.value;
-        props.dispatch({type:ACTION_TYPES.SET_VARIANT,value:newVariant});
-     }
 
 
 
@@ -77,13 +39,14 @@ function AddVariant(props){
             <FormGroup className="variant-form-group variant-row" row={true}>
                 <FormControl>
             
-            <TextField value={name} onChange={handleNameChange} label="variant name*" variant="standard" placeholder="enter name"></TextField>
+            <TextField value={variant.name} onChange={(e) => handleNameChange(e,variant,setVariant)} 
+            label="variant name*" variant="standard" placeholder="enter name"></TextField>
             </FormControl>
             <FormControl>
             
-            <TextField value={year} onChange={handleYearChange} type="number" label="Year*" variant="standard" placeholder="enter year"></TextField>
+            <TextField value={variant.year} onChange={(e)=>handleYearChange(e,variant,setVariant)} type="number" label="Year*" variant="standard" placeholder="enter year"></TextField>
             </FormControl>
-            <TextField value={type} onChange={handleTypeChange} select  helperText="Please select Engine type">
+            <TextField value={variant.type} onChange={(e)=>handleTypeChange(e,variant,setVariant)} select  helperText="Please select Engine type">
               {["PETROL","DIESEL","ELECTRIC"].map((option) => (
             <MenuItem key={option} value={option}>
               {option}
@@ -93,7 +56,7 @@ function AddVariant(props){
 
             <FormControl component="legend">
                 <FormLabel component="legend">Transmission*</FormLabel>
-                <RadioGroup onChange={handleTransmissionChange} value={transmission} aria-label="gender" name="gender1" row={true}>
+                <RadioGroup onChange={(e)=>handleTransmissionChange(e,variant,setVariant)} value={variant.transmission} aria-label="gender" name="gender1" row={true}>
                     <FormControlLabel value="AUTOMATIC" control={<Radio />} label="AUTOMATIC" />
                     <FormControlLabel value="MANUAL" control={<Radio />} label="MANUAL" />
                 </RadioGroup>
@@ -102,23 +65,24 @@ function AddVariant(props){
             </FormGroup>
 
             <FormGroup className="variant-form-group variant-row" row={true}>
-               <TextField label="description*" value={desc} onChange={handleDescchange} multiline placeholder="description*"></TextField>
+               <TextField label="description*" value={variant.desc} onChange={(e)=> handleDescchange(e,variant,setVariant)} 
+               multiline placeholder="description*"></TextField>
                <TextField disabled value={props.activeModel.name} placeholder="model*"></TextField>
-               <TextField value={bodyType} onChange={handleBodyTypeChanges} select helperText="Please select body type">
+               <TextField value={variant.bodyType} onChange={(e)=>handleBodyTypeChanges(e,variant,setVariant)} select helperText="Please select body type">
               {["SEDAN","HATCHBACK","COUPE"].map((option) => (
             <MenuItem key={option} value={option}>
               {option}
             </MenuItem>
             ))}
                </TextField>
-               <TextField value={price} onChange={handlePriceChange} label="ex-showroom-price*" placeholder="ex-showroom-price*"></TextField>
+               <TextField value={variant.price} onChange={(e)=>handlePriceChange(e,variant,setVariant)} label="ex-showroom-price*" placeholder="ex-showroom-price*"></TextField>
             </FormGroup>
-                <UploadImageComponent/>
+                <UploadImageComponent variant={variant} setVariant = {setVariant}/>
          <Divider/>
          <FormGroup style={{marginTop:"40px",display:"flex",flexDirection:"row-reverse"}} >
             
             {/*  <CarProperties addValue={true}/>*/}
-             <Button onClick={() => {history.push("/addVariantProps")}}  size="small" color="primary" variant="contained">Next</Button>
+             <Button onClick={()=>saveVariantAndForward(variant,history)}  size="small" color="primary" variant="contained">Next</Button>
             </FormGroup>
 
         </Container>
