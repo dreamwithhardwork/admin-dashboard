@@ -3,7 +3,17 @@
    }
 
 .model-form-container {
-    width: 50% !important;
+    width: 100% !important;
     min-width: 350px;
     margin-top: 40px;
+}
+
+.model-image{
+    width: 200px;
+    max-width: 200px;
+}
+
+.model-image-false{
+    width: 100px;
+    max-width: 100px;
 }

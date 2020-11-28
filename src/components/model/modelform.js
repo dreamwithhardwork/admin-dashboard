@@ -9,6 +9,7 @@ import SimpleBackdrop from "../messages/backdrop";
 import ToastMessage from "../messages/toastmessage";
 import { ACTION_TYPES,SERVICE_URL} from '../constants/constants'
 import {postRequest} from '../constants/headers';
+import ModelImage from "./modelimages";
 
 const { FormGroup, Switch, TextField, Container, FormControlLabel, Button, DialogActions, DialogTitle, Divider, Chip, ListItemText } = require("@material-ui/core");
 
@@ -172,13 +173,9 @@ function ModelForm(props) {
                 </FormGroup>
                 <TextField rowsMax={8} onChange={handleDescriptionChange} value={desc} multiline rows={3} placeholder={"description*"} />
             </FormGroup>
+            
+            <ModelImage initialState={[]}/>
 
-            {
-                colorImages.map((item, key) => {
-                    console.log(key);
-                    return <ImagesComponent data={colorImages} deleteImage={deleteImage} saveImages={saveImages} index={key} delete={deleteColor} append={addnewColor} />
-                })
-            }
             <Divider></Divider>
             <DialogActions style={{ marginTop: "10px" }}>
                 <Button variant="contained" color="primary">Reset</Button>
