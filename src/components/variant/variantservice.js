@@ -1,25 +1,27 @@
+import { SERVICE_URL } from "../constants/constants";
+import { postRequest } from "../constants/headers";
 
 export const handleNameChange = (e,variant,setVariant) => {
     let newVariant = {...variant};
-    newVariant.name = e.target.value;
+    newVariant.variantName = e.target.value;
     setVariant(newVariant);
 }
 
 export const handleYearChange = (e,variant,setVariant) => {
     let newVariant = {...variant};
-    newVariant.year = e.target.value;
+    newVariant.fromYear = e.target.value;
     setVariant(newVariant);
 }
 
 export const handleTypeChange = (e,variant,setVariant) => {
     let newVariant = {...variant};
-    newVariant.type = e.target.value;
+    newVariant.fuelType = e.target.value;
     setVariant(newVariant);
 }
 
 export const handleDescchange = (e,variant,setVariant) => {
     let newVariant = {...variant};
-    newVariant.desc = e.target.value;
+    newVariant.description = e.target.value;
     setVariant(newVariant);
 }
 
@@ -31,7 +33,7 @@ export const handleBodyTypeChanges = (e,variant,setVariant) => {
 
 export const handlePriceChange = (e,variant,setVariant) => {
     let newVariant = {...variant};
-    newVariant.price = e.target.value;
+    newVariant.exShowroomPrice = e.target.value;
     setVariant(newVariant);
 }
 
@@ -43,17 +45,26 @@ export const handleTransmissionChange = (e,variant,setVariant) => {
 
 const validate = (variant) => {
     debugger
-    if(variant.name.length > 1 && variant.year >2000 && variant.year < 2021 && variant.price > 1000){
+    if(variant.variantName.length > 1 && variant.fromYear >2000 && variant.fromYear < 2021 && variant.exShowroomPrice > 1000){
        return true
     }
     return false;
 }
 
-export const saveVariantAndForward = (variant,history) => {
+export const saveVariant = async (variant)  => {
+    debugger
+    let url = SERVICE_URL.ADD_VARIANT;
+    let response = await fetch(url,postRequest(variant));
+    let body = await response.json();
+    return body;
+}
+
+export const saveVariantAndForward = async (variant,history) => {
     let valid = validate(variant)
     if(valid){
         //saveVariant
-        history.push("/addVariantProps");
+        let res = await saveVariant(variant);
+        history.push("/addVariantProps/"+res._id);
 
     }
     else{

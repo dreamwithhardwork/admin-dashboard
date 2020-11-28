@@ -21,7 +21,7 @@ export default function Footer() {
             <AppBar className={classes.height} color="default" position="sticky">
                 <Toolbar className={classes.height} style={{ display: "flex", justifyContent: "center" }}>
                     <a  href="https://autoride.co.in" >autoride.co.in</a>
-                    <span>&copy; 2020 automax</span>
+                    <span>&copy; 2020 autoride</span>
                 </Toolbar>
             </AppBar>
         </div>

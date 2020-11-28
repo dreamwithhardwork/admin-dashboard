@@ -23,10 +23,12 @@ export const addNewbrand = async (popular,name,logoUrl) => {
     return response;
 }
 
-export const uploadLogo = async (file) => {
+export const uploadLogo = async (file,fileName) => {
 
         var data = new FormData()
         data.append('files', file)
+        data.append('filePath','brandLogo/')
+        data.append('fileName', fileName)
         let res =  await fetch("https://image-service-cemhl7ajqq-uc.a.run.app/api/upload", {
             method:"POST",
             body: data,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TextField, DialogActions, Button, FormControlLabel, Switch, List, LinearProgress, ListItem, ListItemText, DialogTitle, Dialog} from '@material-ui/core';
 import { CloudUpload, Save } from '@material-ui/icons';
 import {uploadLogo,addNewbrand} from './brandservice'
@@ -16,12 +16,10 @@ function NewBrandModel(props) {
   const toastProps = {open:false,toastMessage:"",toastMessageSeverity:"error"};  
 
 
-
-
   const handleUploadLogo = async (event) => {
     localdispatch({type:Actions.SET_LOADING,disabled:true});
     let file = event.target.files[0];
-    let body = await uploadLogo(file);
+    let body = await uploadLogo(file,localstate.bname);
     localdispatch({type:Actions.UPLOAD,logoUrl:file.name,logoUrlName:body[file.name],loading:false});
   }
 
@@ -58,8 +56,16 @@ function NewBrandModel(props) {
   }
 
   const nameChange = (event) => {
+    if(event.target.value.length>1){
+      setDisabled(false);
+    }
+    else{
+      setDisabled(true);
+    }
     localdispatch({type:Actions.NAME_CHANGE,value:event.target.value})
   }
+
+  const[disabledButton,setDisabled] = useState(true)
 
 
   return (
@@ -75,8 +81,8 @@ function NewBrandModel(props) {
         
          <ListItem>
          <input  onChange= {handleUploadLogo} accept="image/*" style={{display:"none"}} id="icon-button" type="file"/>
-         <label for="icon-button">
-         <Button variant="contained" component="span" color="default" startIcon={<CloudUpload />}>Upload Logo</Button></label>                
+         <label onClick={(e) => {if(localstate.bname.length<2)e.preventDefault()}} for="icon-button">
+         <Button disabled={disabledButton} variant="contained"  component="span" color="default" startIcon={<CloudUpload />}>Upload Logo</Button></label>                
          </ListItem>
          <ListItem>
              <ListItemText  style={{color:"green",fontWeight:900}}>
@@ -88,7 +94,7 @@ function NewBrandModel(props) {
       </List>
 
         <DialogActions>
-          <Button onClick={()=>{props.closeModel();localdispatch({type:Actions.RESET});}} variant="contained" size="small"  color="primary">
+          <Button onClick={()=>{props.closeModel();localdispatch({type:Actions.RESET});setDisabled(true)}} variant="contained" size="small"  color="primary">
             Cancel
           </Button>
           <Button disabled={localstate.saveDisabled} variant="contained"  color="primary" size="small" startIcon={<Save />} onClick={hadleAddNewmake}>Save</Button>

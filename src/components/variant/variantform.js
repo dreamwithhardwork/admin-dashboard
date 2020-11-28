@@ -4,7 +4,6 @@ import { ArrowBack } from "@material-ui/icons"
 import { useHistory } from "react-router-dom"
 import './variantform.css';
 import { useState } from "react";
-import { ACTION_TYPES } from "../constants/constants";
 import UploadImageComponent from "./uploadimage";
 import {handleYearChange,handleBodyTypeChanges,handleDescchange,handleNameChange,handlePriceChange,handleTypeChange,handleTransmissionChange,saveVariantAndForward} from './variantservice'
 
@@ -12,15 +11,17 @@ function AddVariant(props){
 
     const history = useHistory();
     const initialVariant = {
-        name:"",
-        year:0,
-        type:"PETROL",
-        desc:"",
+        variantName:"",
+        fromYear:0,
+        fuelType:"PETROL",
+        description:"",
         bodyType:"HATCHBACK",
         transmission:"",
-        price:0.0,
-        externalImages:{},
-        internalImages:{}
+        exShowroomPrice:0.0,
+        exteriorImages:{},
+        interiorImages:{},
+        model:props.model,
+        specifications:[]
     }
     const[variant,setVariant] = useState(initialVariant);
     
@@ -39,14 +40,14 @@ function AddVariant(props){
             <FormGroup className="variant-form-group variant-row" row={true}>
                 <FormControl>
             
-            <TextField value={variant.name} onChange={(e) => handleNameChange(e,variant,setVariant)} 
+            <TextField value={variant.variantName} onChange={(e) => handleNameChange(e,variant,setVariant)} 
             label="variant name*" variant="standard" placeholder="enter name"></TextField>
             </FormControl>
             <FormControl>
             
-            <TextField value={variant.year} onChange={(e)=>handleYearChange(e,variant,setVariant)} type="number" label="Year*" variant="standard" placeholder="enter year"></TextField>
+            <TextField value={variant.fromYear} onChange={(e)=>handleYearChange(e,variant,setVariant)} type="number" label="Year*" variant="standard" placeholder="enter year"></TextField>
             </FormControl>
-            <TextField value={variant.type} onChange={(e)=>handleTypeChange(e,variant,setVariant)} select  helperText="Please select Engine type">
+            <TextField value={variant.fuelType} onChange={(e)=>handleTypeChange(e,variant,setVariant)} select  helperText="Please select Engine type">
               {["PETROL","DIESEL","ELECTRIC"].map((option) => (
             <MenuItem key={option} value={option}>
               {option}
@@ -65,7 +66,7 @@ function AddVariant(props){
             </FormGroup>
 
             <FormGroup className="variant-form-group variant-row" row={true}>
-               <TextField label="description*" value={variant.desc} onChange={(e)=> handleDescchange(e,variant,setVariant)} 
+               <TextField label="description*" value={variant.description} onChange={(e)=> handleDescchange(e,variant,setVariant)} 
                multiline placeholder="description*"></TextField>
                <TextField disabled value={props.activeModel.name} placeholder="model*"></TextField>
                <TextField value={variant.bodyType} onChange={(e)=>handleBodyTypeChanges(e,variant,setVariant)} select helperText="Please select body type">
@@ -75,7 +76,7 @@ function AddVariant(props){
             </MenuItem>
             ))}
                </TextField>
-               <TextField value={variant.price} onChange={(e)=>handlePriceChange(e,variant,setVariant)} label="ex-showroom-price*" placeholder="ex-showroom-price*"></TextField>
+               <TextField value={variant.exShowroomPrice} onChange={(e)=>handlePriceChange(e,variant,setVariant)} label="ex-showroom-price*" placeholder="ex-showroom-price*"></TextField>
             </FormGroup>
                 <UploadImageComponent variant={variant} setVariant = {setVariant}/>
          <Divider/>

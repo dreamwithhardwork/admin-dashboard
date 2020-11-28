@@ -10,7 +10,7 @@ export const getAllUsers = async () => {
 
   export const saveUser = async (payload) => {
     let url = SERVICE_URL.ADD_USER;
-    payload.roles = [payload.roles];
+    payload.roles = Array.isArray(payload.roles)?payload.roles:[payload.roles];
     let response = await fetch(url,postRequest(payload));
     let body = await response.json();
     return body;
@@ -67,3 +67,18 @@ export const getAllUsers = async () => {
         res();
     })
   }
+
+
+  export const uploadProfilePic = async (file,fileName) => {
+    var data = new FormData()
+    data.append('files', file)
+    data.append('filePath','profilePics/')
+    data.append('fileName', fileName)
+    let res =  await fetch("https://image-service-cemhl7ajqq-uc.a.run.app/api/upload", {
+        method:"POST",
+        body: data,
+        files: file
+    });
+    let body = await res.json();
+    return body;
+}

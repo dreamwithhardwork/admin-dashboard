@@ -60,7 +60,7 @@ export const LOGIN_TYPE ={
     ADD_CAR_PROPERTIES: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/properties/add/car",
     DELETE_CAR_PROPERTY: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/properties/delete?id=",
 
-    GET_VARIANT_BY_MODEL: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/variant/get/",
+    GET_VARIANT_BY_ID: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/variant?id=",
     ADD_VARIANT: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/variant/add",
 
 

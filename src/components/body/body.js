@@ -5,6 +5,7 @@ import ModelForm from '../model/modelform';
 import AddVariant from '../variant/variantform';
 import CarProperties from '../properties-v2/carproperties';
 import Users from '../users/users';
+import CarSpecification from '../variant/specifications/carproperties'
 
 function Body() {
     return (
@@ -14,8 +15,8 @@ function Body() {
                 <Route path="/addModel"><ModelForm/></Route>
                 <Route path="/addVariant"><AddVariant/> </Route>
                 <Route path="/users"><Users/></Route>
-                <Route path="/carProperties"> <CarProperties addValue={false}/> </Route>
-                <Route exact path="/addVariantProps"> <CarProperties addValue={true} /> </Route>
+                <Route path="/carProperties"> <CarProperties/> </Route>
+                <Route exact path="/addVariantProps/:id"> <CarSpecification /> </Route>
                 <Route path="*"><UnderConstruction /></Route>
                 
             </Switch>
