@@ -13,10 +13,11 @@ function Body() {
             <Switch>
                 <Route path="/make"> <MakeComponent/> </Route>
                 <Route path="/addModel"><ModelForm/></Route>
+                <Route path="/updateModel"><ModelForm update={true}/></Route>
                 <Route path="/addVariant"><AddVariant/> </Route>
                 <Route path="/users"><Users/></Route>
                 <Route path="/carProperties"> <CarProperties/> </Route>
-                <Route exact path="/addVariantProps/:id"> <CarSpecification /> </Route>
+                <Route path="/addVariantProps/:id"> <CarSpecification /> </Route>
                 <Route path="*"><UnderConstruction /></Route>
                 
             </Switch>

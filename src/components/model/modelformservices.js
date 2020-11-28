@@ -1,14 +1,4 @@
-export const handleNameChange = () => {
 
-}
-
-export const handleDescriptionChange = () => {
-
-}
-
-export const handlePopularityChange = () => {
-
-}
 
 export const onUploadFiles = (event,setNewState,index,color) => {
   let files =  event.target.files;
@@ -19,10 +9,6 @@ export const onUploadFiles = (event,setNewState,index,color) => {
   setNewState(index,color,images)
 }
 
-
-export const onSelection = () => {
-
-}
 
 const upload = async (file,brand,color) => {
         var data = new FormData();
@@ -147,4 +133,23 @@ export const updateImages =  (updatedRow,oldRow,rows,setRows,brand) => {
       reject("Choose color")
    }
    })
+}
+
+
+export const getColorImagesPayload = (arr) => {
+   let imagesWithColors = {};
+    arr.map((item) => {
+       imagesWithColors[item.color] = item.images;
+    })
+    return imagesWithColors;
+}
+
+export const setColorImagesPayload = (arr) => {
+  let imagesWithColors = {};
+  let keys = Object.keys(arr);
+  let images = []
+   keys.map((item) => {
+      images.push({color:item,images:arr[item]})
+   })
+   return images;
 }

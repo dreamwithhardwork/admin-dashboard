@@ -5,11 +5,13 @@ import AutoRideToolBar from '../make/toolbar';
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { ACTION_TYPES } from "../constants/constants";
+import { useHistory } from "react-router-dom";
 
 
 function Model(props){
     const [filterList, setFilterList] = useState(props.models);
     const [filter, setFilter] = useState(false);
+    const history = useHistory();
     const handleFilter = (searchTearm) => {
         if(searchTearm===""){
             setFilter(false);
@@ -23,11 +25,12 @@ function Model(props){
     }
 
     const handleModelDispaly = (model) => {
-         props.dispatch({type:ACTION_TYPES.SET_ACTIVE_MODEL,value:model})
+        props.dispatch({type:ACTION_TYPES.SET_ACTIVE_MODEL,value:model})
     }
 
     const handleEdit = (model) => {
-       console.log(model)
+        props.dispatch({type:ACTION_TYPES.SET_ACTIVE_MODEL,value:model})
+        history.push("/updateModel")
     }
 
     

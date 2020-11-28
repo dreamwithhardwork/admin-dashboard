@@ -10,9 +10,6 @@ const colors = ["White", "Silver", "Black", "Grey", "Blue", "Red", "Brown", "Yel
 
 function ModelImage(props){
 
-
-    const[rows,setRows] = useState(props.initialState);
-
     const onSelection = (e, value,props) => {
         props.onChange(value);
     }
@@ -69,12 +66,12 @@ function ModelImage(props){
   }
   editable={
       {
-          onRowAdd: newRow => addNewColor(newRow,rows,setRows,props.brand),
-          onRowDelete: delRow => deleteColorimages(delRow,rows,setRows),
-          onRowUpdate: (updatedRow, oldRow) => updateImages(updatedRow,oldRow,rows,setRows,props.brand)
+          onRowAdd: newRow => addNewColor(newRow,props.rows,props.update,props.brand),
+          onRowDelete: delRow => deleteColorimages(delRow,props.rows,props.update),
+          onRowUpdate: (updatedRow, oldRow) => updateImages(updatedRow,oldRow,props.rows,props.update,props.brand)
       }
   }
-  data={rows}
+  data={props.rows}
  />
    )
 }
