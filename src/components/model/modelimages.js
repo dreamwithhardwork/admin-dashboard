@@ -49,7 +49,7 @@ function ModelImage(props){
                 <div style={{display:"flex",flexDirection:"row"}}>
                 {
                     prop.value===undefined?"":prop.value.map((file,index)=> {
-                        return  <ImageComponent delete={true} index={index} src={file}></ImageComponent>
+                        return  <ImageComponent delete={true} prop={prop} index={index} src={file}></ImageComponent>
                     })
                 }
                 <div style={{display:"flex",alignItems:"center",marginLeft:"10px",backgroundColor:"Menu",width:"200px",justifyContent:"center"}}>

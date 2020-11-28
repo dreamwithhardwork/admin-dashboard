@@ -12,12 +12,15 @@ export const onUploadFiles = (event,setNewState,index,color) => {
 
 const upload = async (file,brand,color) => {
         var data = new FormData();
-        debugger;
+        let fileCount = 0
         file.forEach((f)=> {
             if(f.file!=undefined){
+              fileCount++;
               data.append('files', f.file)
             }
         })
+        if(fileCount===0)
+         return {};
         data.append('filePath','model/'+brand+"/"+color)
         let res =  await fetch("https://image-service-cemhl7ajqq-uc.a.run.app/api/upload", {
             method:"POST",
@@ -74,6 +77,7 @@ function removeImageBinaries(arr){
 }
 
 export const addNewColor = (newRow,rows,setRows,brand) => {
+  debugger;
   let newRows = [...rows];
   let color = newRow.color;
   let files = newRow.images;
@@ -108,7 +112,7 @@ export const deleteColorimages = (delRow,rows,setRows) => {
 }
 
 export const updateImages =  (updatedRow,oldRow,rows,setRows,brand) => {
-
+  debugger;
   console.log(updatedRow);
   console.log(oldRow);
   console.log(rows);
