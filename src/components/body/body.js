@@ -6,6 +6,7 @@ import AddVariant from '../variant/variantform';
 import CarProperties from '../properties-v2/carproperties';
 import Users from '../users/users';
 import CarSpecification from '../variant/specifications/carproperties'
+import BrandTableView from '../make/tableview';
 
 function Body() {
     return (
@@ -18,6 +19,7 @@ function Body() {
                 <Route path="/users"><Users/></Route>
                 <Route path="/carProperties"> <CarProperties/> </Route>
                 <Route path="/addVariantProps/:id"> <CarSpecification /> </Route>
+                <Route path="/brandTableView"><BrandTableView/></Route>
                 <Route path="*"><UnderConstruction /></Route>
                 
             </Switch>

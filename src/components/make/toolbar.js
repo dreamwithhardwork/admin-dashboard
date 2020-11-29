@@ -13,7 +13,10 @@ function AutoRideToolBar(props){
     }
 
     const handleToggleTableView = () => {
-      console.log("jhghghg")
+      console.log(props)
+      if(props.type === "Brand"){
+        history.push("/brandTableView")
+      }
     }
 
     const history = useHistory();

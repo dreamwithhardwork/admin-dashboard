@@ -42,7 +42,6 @@ function Make(props){
         props.dispatch({type:ACTION_TYPES.ADD_BRANDS,value:n_makeList});
         if(n_makeList.length>0)
         setBrand(n_makeList[0].name,props.dispatch)
-        //props.dispatch({type:ACTION_TYPES.SET_ACTIVE_BRAND,value:n_makeList[0].name})
         setFilterList(n_makeList);
     },[])
 
@@ -51,7 +50,7 @@ function Make(props){
 
     return(
         <Paper elevation={0} className="makeroot">
-            <AutoRideToolBar type="Brand" filter={filterBrands}/>
+            <AutoRideToolBar  type="Brand" filter={filterBrands}/>
             <div className="makelist">
                 {
                        
