@@ -16,13 +16,13 @@ function ModelImage(props){
     return(
       <MaterialTable
         icons={tableIcons}
+        title="Images with colors"
         options={
           {
           paging:true,
           columnResizable:true,
           toolbar:true,
           header:false,
-          showTitle:false,
           search:false,
           pageSize:3,
           pageSizeOptions:[2,3,5]
