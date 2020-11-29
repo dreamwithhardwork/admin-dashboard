@@ -7,12 +7,14 @@ import CarProperties from '../properties-v2/carproperties';
 import Users from '../users/users';
 import CarSpecification from '../variant/specifications/carproperties'
 import BrandTableView from '../make/tableview';
+import RTO from '../rto/rto';
 
 function Body() {
     return (
         <div className="autoride-body">
             <Switch>
                 <Route path="/make"> <MakeComponent/> </Route>
+                <Route path='/rto'> <RTO/> </Route>
                 <Route path="/addModel"><ModelForm/></Route>
                 <Route path="/updateModel"><ModelForm update={true}/></Route>
                 <Route path="/addVariant"><AddVariant/> </Route>
