@@ -10,7 +10,7 @@ export const onUploadFiles = (event,setNewState,index,color) => {
 }
 
 
-const upload = async (file,brand,color) => {
+export const upload = async (file,brand,color) => {
         var data = new FormData();
         let fileCount = 0
         file.forEach((f)=> {
@@ -21,7 +21,7 @@ const upload = async (file,brand,color) => {
         })
         if(fileCount===0)
          return {};
-        data.append('filePath','model/'+brand+"/"+color)
+        data.append('filePath','model/'+brand+"/"+color+"/")
         let res =  await fetch("https://image-service-cemhl7ajqq-uc.a.run.app/api/upload", {
             method:"POST",
             body: data,
@@ -59,14 +59,14 @@ return new Promise((res,rej)=> {
 export const uploadImages = async (event,props) => {
   let files =  event.target.files;
   let images = props.value === undefined ? [] : props.value;
-  
   for(let i =0;i<files.length;i++){
        await addLocalImage(files[i],images);
        props.onChange(images);
   }
 }
 
-function removeImageBinaries(arr){
+export const removeImageBinaries = (arr)=> {
+  debugger;
   let images = [];
   arr.map((item)=> {
     if(item.file===undefined){
@@ -87,7 +87,10 @@ export const addNewColor = (newRow,rows,setRows,brand) => {
        let body = await upload(files,brand,color)
        let newImages = removeImageBinaries(files);
        Object.values(body).map(item => {
-         newImages.push(item);
+         let newImageObj = {
+           url:item
+         }
+         newImages.push(newImageObj);
        })
        newRow.images = newImages;
        newRows.push(newRow);
@@ -126,7 +129,10 @@ export const updateImages =  (updatedRow,oldRow,rows,setRows,brand) => {
       let body = await upload(files,brand,color)
       let newImages = removeImageBinaries(files);
       Object.values(body).map(item => {
-        newImages.push(item);
+        let newImageObj = {
+          url:item
+        }
+        newImages.push(newImageObj);
       })
       newRow.images = newImages;
       newRows.splice(index,1,newRow);
@@ -149,7 +155,8 @@ export const getColorImagesPayload = (arr) => {
 }
 
 export const setColorImagesPayload = (arr) => {
-  let imagesWithColors = {};
+  if(arr===undefined || arr===null)
+  return [];
   let keys = Object.keys(arr);
   let images = []
    keys.map((item) => {

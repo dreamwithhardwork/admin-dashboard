@@ -13,7 +13,11 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
-import { forwardRef } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { SERVICE_URL } from '../constants/constants';
+import { getRequest } from '../constants/headers';
 const { default: MaterialTable } = require("material-table");
 const { FormControlLabel, Switch, List, ListItem, ListItemText } = require("@material-ui/core");
 
@@ -45,11 +49,25 @@ const tableIcons = {
       return promise
   }
 
+  
+
 function MakeTableView(props){
     console.log(props)
+    const[variants,setVariante] = useState([]);
+    const history = useHistory();
+
+    useEffect(async ()=>{
+
+    let res = await fetch(SERVICE_URL.GET_VARIANTS_BY_MAKE_MODEL+"make="+props.activeBrand+"&model="+props.activeModel.name,getRequest());
+    let body = await res.json();
+    setVariante(body)
+
+    },[props.activeModel])
+
     return(
         <MaterialTable
         icons={tableIcons}
+    
         options={
             {
                 search:false,
@@ -60,25 +78,51 @@ function MakeTableView(props){
                     display:"none"
                 }
                 ,
-                toolbar:false
+                toolbar:false,
+                rowStyle:{
+                    padding:"0px"
+                }
             }
         }
         columns= {
             [
                 {title:"variant", field:'name', cellStyle: {padding:0},
                  render: rowData => <List component="nav">
-                <ListItem button>
-                    <ListItemText primary ="HTX G" secondary="1497 cc,Manual,Petrol,16.8 Kmpl"></ListItemText>
+                <ListItem style={{color:"HighlightText",padding:"0px 6px"}}>
+                    <ListItemText primary ={rowData.variantName} secondary={[rowData.transmission, rowData.bodyType].join(", ")}></ListItemText>
+                </ListItem>
+            </List>},
+               {title:"ex-showroom",field:"ex-showroom", cellStyle:{padding:0},
+               render: rowData => <List component="nav">
+                <ListItem style={{color:"HighlightText",padding:"0px 6px"}}>
+                    <ListItemText primary ={"Ex-showroom price"} secondary={new Intl.NumberFormat('en-IN', {
+        style: 'currency',
+        currency: 'INR'
+        }).format(rowData.exShowroomPrice)}></ListItemText>
                 </ListItem>
             </List>}
+
             ]
         } 
-        data={[{name:"dummy",popular:true},{name:"dummy",popular:true},{name:"dummy",popular:true},{name:"dummy",popular:true},{name:"dummy",popular:true}
-        ,{name:"dummy",popular:true},{name:"dummy",popular:true}]}
+        onRowClick={(event, rowData, togglePanel) => {history.push("/addVariant?id="+rowData._id)}}
+        data={variants}
         >
 
         </MaterialTable>
     )
 }
 
-export default MakeTableView
+
+const mapPropsToState = state => {
+    return {
+        ...state
+    }
+}
+
+const mapDispatchToState  = dispatch => {
+    return {
+         dispatch
+    }
+}
+
+export default connect(mapPropsToState,mapDispatchToState)(MakeTableView)

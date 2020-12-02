@@ -1,9 +1,7 @@
 import React from 'react';
 import {Avatar,Badge,ClickAwayListener,Grow,Paper,Popper,MenuItem,MenuList,IconButton} from '@material-ui/core';
-import {NotificationsActive as NotificationsActiveIcon} from '@material-ui/icons'
-import PhotoCamera from "@material-ui/icons/PhotoCamera";
+import {NotificationsActive as NotificationsActiveIcon} from '@material-ui/icons';
 import {useStyles} from './styles';
-import {ACTION_TYPES} from '../constants/constants';
 import { useDispatch, connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -14,8 +12,7 @@ function UserProfile(props) {
 
     const classes = useStyles();
     const anchorRef = React.useRef(null);
-    const [open, setOpen] = React.useState(false)
-     const dispatch =  useDispatch();
+    const [open, setOpen] = React.useState(false);
      const history = useHistory();
 
     const defaultProps = {

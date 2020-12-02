@@ -16,7 +16,8 @@ function CarSpecificationTypes(props){
         editable={
             {
                 onRowAdd: newRow => addSpecificationRow(newRow,props.rows,props.setRows,props.row),
-                onRowUpdate: (newRow,oldRow) => updateSpecificationRow(newRow,oldRow,props.rows,props.setRows,props.row)
+                onRowUpdate: (newRow,oldRow) => updateSpecificationRow(newRow,oldRow,props.rows,props.setRows,props.row),
+                onBulkUpdate: changes => new Promise((res,rej)=> {console.log(changes);res();})
             }
         }
         columns={

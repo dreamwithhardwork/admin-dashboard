@@ -14,7 +14,6 @@ function Make(props){
     const [makeList,setMakeList] = useState([]);
     const [filterList, setFilterList] = useState([]);
     const [filter, setFilter] = useState(false);
-    const [tableView, setTableView] = useState(true)
 
     const updateBrands = (newBrand) => {
         let newMakeList = [...makeList]

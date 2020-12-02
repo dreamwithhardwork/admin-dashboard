@@ -1,5 +1,5 @@
 import {SERVICE_URL,ACTION_TYPES} from '../constants/constants';
-import {getRequest,postRequest,payloads, deleteRequest} from '../constants/headers';
+import {getRequest,postRequest, deleteRequest} from '../constants/headers';
 
 export const getAllBrands = async () => {
  let response = await fetch(SERVICE_URL.GET_ALL_MAKES+"CAR",getRequest());

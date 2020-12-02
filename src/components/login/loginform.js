@@ -1,4 +1,4 @@
-import {Button, TextField, Dialog, DialogActions,DialogContent,DialogContentText,DialogTitle,FormControlLabel,Switch,LinearProgress, Backdrop} from '@material-ui/core';
+import {Button, TextField, Dialog, DialogActions,DialogContent,DialogContentText,DialogTitle,FormControlLabel,Switch,LinearProgress} from '@material-ui/core';
 import React from 'react';
 import {reducer,initialState} from './reducer';
 import {ACTION_TYPES} from '../constants/constants';

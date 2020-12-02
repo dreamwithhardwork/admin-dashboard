@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import UserProfile from './userprofile';
 import logo from '../../logo2.png';
 import {reducer,initialState,ACTION_TYPES} from './headerService';
-import SideNav from '../sidenav/sinenav';
 import LoginForm from '../login/loginform';
 import CustomizedSnackbars from '../messages/toastmessage';
 
@@ -21,7 +20,7 @@ function Header(props){
                     onClick = {() => {props.toggleSidenav()}}>
                         <MenuIcon />
                     </IconButton>
-                    <Button><img style={{width:"140px",marginLeft:"5px"}} src={logo}></img></Button>
+                    <Button><img style={{width:"140px",marginLeft:"5px"}} src={logo} alt={"AUTORIDE"}></img></Button>
                     <Typography variant="h6" className={classes.title}></Typography>
                     {
                         props.login ? <UserProfile /> : <Button color="inherit" className={props.login ? classes.displayNone : classes.displayBlock} 

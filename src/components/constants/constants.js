@@ -62,6 +62,7 @@ export const LOGIN_TYPE ={
 
     GET_VARIANT_BY_ID: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/variant?id=",
     ADD_VARIANT: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/variant/add",
+    GET_VARIANTS_BY_MAKE_MODEL: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/variant/get?"
 
 
 

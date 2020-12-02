@@ -5,7 +5,8 @@ import { connect } from "react-redux";
 const { default: Carousel } = require("react-material-ui-carousel");
 
 function ModelDetails(props) {
-    const colors = props.activeModel.imagesWithColors === undefined?[]:Object.keys(props.activeModel.imagesWithColors);
+    const colors = props.activeModel.imagesWithColors === undefined || props.activeModel.imagesWithColors === null 
+     ?[]:Object.keys(props.activeModel.imagesWithColors);
     console.log(colors)
     return (
 
@@ -16,7 +17,7 @@ function ModelDetails(props) {
             <CardActionArea className="carosel-model">
                 <Carousel animation="slide"  autoPlay={true} indicators={false} >
                     {
-                       colors.length>0? props.activeModel.imagesWithColors[colors[0]].map((item,key) =>  <CardMedia component="img" image={item} title="" />)
+                       colors.length>0? props.activeModel.imagesWithColors[colors[0]].map((item,key) =>  <CardMedia component="img" image={item.url} title="" />)
                        :<CardMedia/>
                     }
                     

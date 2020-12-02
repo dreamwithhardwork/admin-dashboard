@@ -1,11 +1,10 @@
-import { Box, Divider, Paper, Tabs, Tab } from "@material-ui/core";
+import { Divider} from "@material-ui/core";
 import Model from "../../components/model/model";
 import Make from "../../components/make/make";
 import React from 'react'
 import ModelDetails from "../../components/model/modeldetails";
 import VariantList from "../../components/variant/variants";
 import '../makecomponent/makecomponent.css';
-import { Add } from "@material-ui/icons";
 
 function MakeComponent() {
   const [value, setValue] = React.useState(2);

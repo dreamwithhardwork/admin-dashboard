@@ -1,4 +1,4 @@
-import {ACTION_TYPES,LOGIN_TYPE} from '../constants/constants'
+import {ACTION_TYPES} from '../constants/constants'
 
 
 

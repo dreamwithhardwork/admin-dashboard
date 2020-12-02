@@ -1,6 +1,5 @@
-import {Link, Switch, Route} from 'react-router-dom';
+import { Switch, Route} from 'react-router-dom';
 import MakeComponent from '../../bodycomponents/makecomponent/makecomponent';
-import Make from '../make/make';
 import ModelForm from '../model/modelform';
 import AddVariant from '../variant/variantform';
 import CarProperties from '../properties-v2/carproperties';

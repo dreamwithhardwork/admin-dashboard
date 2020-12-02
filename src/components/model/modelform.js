@@ -1,5 +1,4 @@
-import { CloudUpload, Add, Delete, Save, ArrowBack, Done } from "@material-ui/icons";
-import { Autocomplete } from "@material-ui/lab"
+import { Save, ArrowBack } from "@material-ui/icons";
 import React, { useState, useEffect } from 'react'
 import './modelformstyle.css';
 import { useHistory } from "react-router-dom";
@@ -11,7 +10,7 @@ import {postRequest} from '../constants/headers';
 import ModelImage from "./modelimages";
 import { getColorImagesPayload, setColorImagesPayload } from "./modelformservices";
 
-const { FormGroup, Switch, TextField, Container, FormControlLabel, Button, DialogActions, DialogTitle, Divider, Chip, ListItemText } = require("@material-ui/core");
+const { FormGroup, Switch, TextField, Container, FormControlLabel, Button, DialogActions, DialogTitle, Divider } = require("@material-ui/core");
 
 function ModelForm(props) {
 

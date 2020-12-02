@@ -7,14 +7,15 @@ import MakeTableView from "../make/maketableview";
 
 function VariantsList(props){
     const history = useHistory();
+    history.push()
     return(
        <Fragment>
-            <Paper style={{ marginTop: "20px" }} square>
-          <Tabs indicatorColor="primary" textColor="primary" aria-label="disabled tabs example">
+          <Paper style={{ marginTop: "20px"}} square>
+          <Tabs variant="scrollable" indicatorColor="primary" textColor="primary" aria-label="disabled tabs example">
             <Tab label="Petrol Version" />
             <Tab label="Automatic Version" />
             <Tab label="Other" />
-            <Tab icon={<Add onClick={() => {history.push("/addVariant")}}/>} />
+            <Tab icon={<Add onClick={() => {history.push("/addVariant?id=new")}}/>} />
           </Tabs>
         </Paper>
       <div style={{maxHeight:"calc(100vh - 390px)",overflow:"auto",marginTop:"5px"}}>

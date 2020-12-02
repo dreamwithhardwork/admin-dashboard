@@ -1,4 +1,4 @@
-import { Container, TextField, MenuItem } from '@material-ui/core';
+import { Container, TextField, MenuItem, FormControlLabel } from '@material-ui/core';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import {tableIcons, addRow, updateRow, deleteRow} from './tableprops';
@@ -6,7 +6,8 @@ import { getVariant} from './carpropertiesservices';
 import {getProperties} from '../../properties-v2/carpropertiesservices'
 import MaterialTable from 'material-table';
 import CarSpecificationTypes from './carspecificationtypes';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
+import { ArrowBack } from '@material-ui/icons';
 
 function CarSpecifications(props){
 
@@ -14,6 +15,7 @@ function CarSpecifications(props){
     const [variant,setRows] = useState({specifications:[]})
     const {id} = useParams();
     console.log(id)
+    const history = useHistory();
 
     useEffect(async ()=>{
         let body = await getVariant(id);
@@ -26,6 +28,9 @@ function CarSpecifications(props){
 
     return(
         <Container >
+            <div style={{marginTop:"30px"}}></div>
+            <FormControlLabel label="&nbsp;&nbsp;&nbsp;Back" control={<ArrowBack onClick={() => history.push("/addVariant?id="+id)} />}></FormControlLabel>
+            <div style={{marginTop:"30px"}}></div>
         <MaterialTable 
         title="Add properties"
         icons={tableIcons}

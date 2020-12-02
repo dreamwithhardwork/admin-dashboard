@@ -37,6 +37,13 @@ export const handlePriceChange = (e,variant,setVariant) => {
     setVariant(newVariant);
 }
 
+const currency = (e) => {
+    console.log(new Intl.NumberFormat('en-IN', {
+        style: 'currency',
+        currency: 'INR'
+        }).format(e.target.value))
+}
+
 export const handleTransmissionChange = (e,variant,setVariant) => {
     let newVariant = {...variant};
     newVariant.transmission = e.target.value;

@@ -1,9 +1,10 @@
 import './modelformstyle.css'
-import { ClearOutlined } from '@material-ui/icons';
-const { CardMedia, Divider } = require("@material-ui/core");
+import { ClearOutlined, Description, VisibilityOutlined } from '@material-ui/icons';
+const { CardMedia, Divider, TextField } = require("@material-ui/core");
 const { default: Carousel } = require("react-material-ui-carousel");
 
 function ImageComponent(props){
+    console.log(props.prop)
     const deleteImage  =() => {
         let newImages = [...props.prop.value];
         let index = props.index;
@@ -14,10 +15,11 @@ function ImageComponent(props){
     return(
         <Carousel className={props.delete?"model-image":"model-image-false"} navButtonsAlwaysInvisible={true}   autoPlay={false} indicators={false} >
                    <div>
-                   <CardMedia style={{marginLeft:"10px"}} component="img" image={typeof props.src ==="object"?props.src.value:props.src} />  
+                   <CardMedia style={{marginLeft:"10px"}} component="img" image={props.src.url === undefined || props.src.url == null
+                    ? props.src.value :props.src.url} />  
                    {
-                       props.delete && props.src!==null ? <div style={{position:"relative",display:"flex",justifyContent:"center"}}>
-                       <ClearOutlined onClick={deleteImage} />
+                       props.delete && props.src!==null ? <div style={{position:"relative",display:"flex",justifyContent:"space-evenly"}}>
+                       <Description style={{cursor:"pointer"}}/> <VisibilityOutlined style={{cursor:"pointer"}}/> <ClearOutlined style={{cursor:"pointer"}} onClick={deleteImage} />
                    </div>:""
                    }
                    <Divider/>

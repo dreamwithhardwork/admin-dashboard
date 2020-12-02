@@ -1,15 +1,19 @@
 import { connect } from "react-redux"
-import { Container, TextField, FormGroup, FormControlLabel, DialogTitle, Divider, FormControl, FormLabel, RadioGroup, Radio, MenuItem, Button } from "@material-ui/core"
+import { Container, TextField, FormGroup, FormControlLabel, DialogTitle, Divider, FormControl, FormLabel, RadioGroup, Radio, MenuItem, Button, Dialog, DialogContent } from "@material-ui/core"
 import { ArrowBack } from "@material-ui/icons"
-import { useHistory } from "react-router-dom"
+import { useHistory, useLocation } from "react-router-dom"
 import './variantform.css';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UploadImageComponent from "./uploadimage";
 import {handleYearChange,handleBodyTypeChanges,handleDescchange,handleNameChange,handlePriceChange,handleTypeChange,handleTransmissionChange,saveVariantAndForward} from './variantservice'
+import { SERVICE_URL } from "../constants/constants";
+import { getRequest } from "../constants/headers";
 
 function AddVariant(props){
 
     const history = useHistory();
+    const query = new URLSearchParams(useLocation().search);
+
     const initialVariant = {
         variantName:"",
         fromYear:0,
@@ -18,12 +22,34 @@ function AddVariant(props){
         bodyType:"HATCHBACK",
         transmission:"",
         exShowroomPrice:0.0,
-        exteriorImages:{},
-        interiorImages:{},
+        exteriorImages:[],
+        interiorImages:[],
         model:props.model,
-        specifications:[]
+        specifications:[],
+        model:"",
+        make:""
     }
     const[variant,setVariant] = useState(initialVariant);
+    const[loaded,setLoaded] = useState(false);
+
+    useEffect(async () => {
+      
+        if(query.get("id")==="new"){
+            let newState = {...initialVariant};
+            newState.model=props.activeModel.name;
+            newState.make = props.activeBrand;
+            setVariant(newState);
+            setLoaded(true);
+
+        }
+        else{
+           let res = await fetch(SERVICE_URL.GET_VARIANT_BY_ID+query.get("id"),getRequest());
+           let body = await res.json();
+           setVariant(body);
+           setLoaded(true);
+        }
+
+    },[])
     
 
 
@@ -78,14 +104,14 @@ function AddVariant(props){
                </TextField>
                <TextField value={variant.exShowroomPrice} onChange={(e)=>handlePriceChange(e,variant,setVariant)} label="ex-showroom-price*" placeholder="ex-showroom-price*"></TextField>
             </FormGroup>
-                <UploadImageComponent variant={variant} setVariant = {setVariant}/>
+                {loaded?<UploadImageComponent variant={variant} setVariant = {setVariant}/>:""}
          <Divider/>
          <FormGroup style={{marginTop:"40px",display:"flex",flexDirection:"row-reverse"}} >
             
             {/*  <CarProperties addValue={true}/>*/}
              <Button onClick={()=>saveVariantAndForward(variant,history)}  size="small" color="primary" variant="contained">Next</Button>
             </FormGroup>
-
+       
         </Container>
     )
 
