@@ -106,6 +106,7 @@ function AddVariant(props){
             </FormGroup>
                 {loaded?<UploadImageComponent variant={variant} setVariant = {setVariant}/>:""}
          <Divider/>
+
          <FormGroup style={{marginTop:"40px",display:"flex",flexDirection:"row-reverse"}} >
             
             {/*  <CarProperties addValue={true}/>*/}

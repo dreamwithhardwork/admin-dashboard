@@ -1,7 +1,7 @@
-import { Container, TextField, MenuItem, FormControlLabel } from '@material-ui/core';
+import { Container, TextField, MenuItem, FormControlLabel, Divider, FormGroup, Button } from '@material-ui/core';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import {tableIcons, addRow, updateRow, deleteRow} from './tableprops';
+import {tableIcons, addRow, updateRow} from './tableprops';
 import { getVariant} from './carpropertiesservices';
 import {getProperties} from '../../properties-v2/carpropertiesservices'
 import MaterialTable from 'material-table';
@@ -14,8 +14,11 @@ function CarSpecifications(props){
 
     const [variant,setRows] = useState({specifications:[]})
     const {id} = useParams();
-    console.log(id)
     const history = useHistory();
+
+    const handleVariantSave = () => {
+
+    }
 
     useEffect(async ()=>{
         let body = await getVariant(id);
@@ -23,6 +26,7 @@ function CarSpecifications(props){
           let specifications = await getProperties();
           body.specifications = specifications;
         }
+        console.log(body)
         setRows(body)
     },[])
 
@@ -64,6 +68,13 @@ function CarSpecifications(props){
         onRowClick={(event, rowData, togglePanel) => togglePanel()}
         
         />
+
+         <Divider/>
+         <FormGroup style={{marginTop:"40px",display:"flex",flexDirection:"row-reverse"}} >
+            
+            {/*  <CarProperties addValue={true}/>*/}
+             <Button onClick={handleVariantSave}  size="small" color="primary" variant="contained">Save</Button>
+            </FormGroup>
         </Container>
     )
 }
