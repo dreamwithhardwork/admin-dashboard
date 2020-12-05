@@ -1,0 +1,18 @@
+.root {
+    min-width: 300px ;
+    margin-right: 30px;
+    margin-bottom: 30px;
+}
+
+.media{
+    height: 159px;
+}
+
+.side-nav-filter {
+    transition: width 1s !important;
+    height: calc(100vh - 114px);
+    width: 280px;
+    background-color:white !important;
+    overflow: auto;
+    margin-right: 10px;
+}

@@ -81,7 +81,8 @@ function MakeTableView(props){
                 toolbar:false,
                 rowStyle:{
                     padding:"0px"
-                }
+                },
+                actionsColumnIndex: -1
             }
         }
         columns= {
@@ -100,11 +101,16 @@ function MakeTableView(props){
         currency: 'INR'
         }).format(rowData.exShowroomPrice)}></ListItemText>
                 </ListItem>
-            </List>}
+            </List>},
+            {
+                title:"dummy",field:"dummy",
+                render: rowData => <Edit onClick= {()=>{history.push("/addVariant?id="+rowData._id)}}/>
+            }
 
             ]
         } 
-        onRowClick={(event, rowData, togglePanel) => {history.push("/addVariant?id="+rowData._id)}}
+        
+        onRowClick={(event, rowData, togglePanel) => {}}
         data={variants}
         >
 
