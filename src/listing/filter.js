@@ -33,7 +33,7 @@ function Filter(props){
                      <div>Maximum Price</div>
                  </div>
               </div>
-
+              <h4>Make & Model</h4>
               <Divider/>
 
             {

@@ -55,6 +55,7 @@ export const LOGIN_TYPE ={
 
     ADD_NEW_MODEL: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/model/add",
     GET_ALL_MODEL: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/model?make=",
+    GET_ALL_MODELS: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/model/all",
 
     GET_CAR_PROPERTIES: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/properties/get/car",
     ADD_CAR_PROPERTIES: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/properties/add/car",
