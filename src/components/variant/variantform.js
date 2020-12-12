@@ -96,7 +96,7 @@ function AddVariant(props){
                multiline placeholder="description*"></TextField>
                <TextField disabled value={props.activeModel.name} placeholder="model*"></TextField>
                <TextField value={variant.bodyType} onChange={(e)=>handleBodyTypeChanges(e,variant,setVariant)} select helperText="Please select body type">
-              {["SEDAN","HATCHBACK","COUPE"].map((option) => (
+              {["SEDAN","HATCHBACK","COUPE","SUV","XUV"].map((option) => (
             <MenuItem key={option} value={option}>
               {option}
             </MenuItem>

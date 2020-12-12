@@ -1,14 +1,24 @@
 import { CheckBox, ExpandMore } from '@material-ui/icons';
+import { Fragment, useEffect, useState } from 'react';
+import { SERVICE_URL } from '../components/constants/constants';
+import { getRequest } from '../components/constants/headers';
 import './CarListingCard.css'
-const { Paper, MenuList, List, Typography, Slider, Divider, Accordion, AccordionSummary, FormControlLabel, Checkbox, FormGroup, RadioGroup, Radio, FormLabel } = require("@material-ui/core");
+const { Paper,Slider, Divider, Accordion, AccordionSummary, FormControlLabel, Checkbox, FormGroup, RadioGroup, Radio, FormLabel } = require("@material-ui/core");
 
-function valuetext(value) {
-    return `${value}°C`;
-  }
-
-  const brands = ["Hyundai", "Maruti", "Kia", "Ford"]
+  
 
 function Filter(props){
+
+  const [brands, setBrands] = useState (["Hyundai", "Maruti", "Kia", "Ford"])
+  const[priceRange,setPriceRange] = useState([90000,1000000]);
+  useEffect(async ()=>{
+     let url = SERVICE_URL.GET_ALL_MAKE_MODELS;
+     let response = await fetch(url, getRequest());
+     let body = await response.json();
+     setBrands(body)
+     console.log(body);
+  },[])
+
     return(
         <Paper className="side-nav-filter">
            <div style={{margin:"0px 7px"}}>
@@ -18,26 +28,36 @@ function Filter(props){
               
               <div style={{marginTop:"20px"}}>
               <div style={{display:"flex",justifyContent:"space-between"}}>
-                     <div>50,000/-</div>
-                     <div>20,00,000/-</div>
+              <div>{new Intl.NumberFormat('en-IN', {
+                     style: 'currency',
+                     currency: 'INR'
+                  }).format(priceRange[0])}</div>
+                     <div>{new Intl.NumberFormat('en-IN', {
+                     style: 'currency',
+                     currency: 'INR'
+                  }).format(priceRange[1])}</div>
                  </div>
               <Slider
-                 defaultValue={60000}
                  aria-labelledby="discrete-slider-always"
-                 valueLabelDisplay="auto"
                  step={10000}
                  min={50000}
-                 max={2000000} />
+                 max={2000000}
+                 defaultValue={[...priceRange]}
+                 track="inverted"
+                 onChange={(e,value) => {
+                   setPriceRange([...value])
+                 }}
+                 />
                  <div style={{display:"flex",justifyContent:"space-between", marginBottom:"25px"}}>
                      <div>Minimum Price</div>
                      <div>Maximum Price</div>
                  </div>
               </div>
               <h4>Make & Model</h4>
-              <Divider/>
 
-            {
-                brands.map(item => <Accordion>
+           <div style={{maxHeight:"300px",overflow:"auto"}}>
+           {
+                Object.keys(brands).map(item => <Accordion>
                     <AccordionSummary
                 expandIcon={<ExpandMore />}
                 aria-controls="panel1bh-content"
@@ -46,12 +66,35 @@ function Filter(props){
                   aria-label="Acknowledge"
                   onClick={(event) => event.stopPropagation()}
                   onFocus={(event) => event.stopPropagation()}
-                  control={<Checkbox />}
-                  label={item}
+                  control={<Checkbox name ={item} onClick={(e) => {
+                  }}/>}
+                  label={item.toLocaleUpperCase()}
                 />
                   </AccordionSummary>
+                  <Divider/>
+                  <div style={{display:"flex",flexDirection:"column", alignItems:"center"}}>
+                  <div style={{display:"flex",flexDirection:"column"}}>
+                  {
+                      Object.keys(brands[item]).map(key => {
+                        return <Fragment>
+                          <FormControlLabel
+                        aria-label={key.toLocaleUpperCase()}
+                        onClick={(event) => event.stopPropagation()}
+                        onFocus={(event) => event.stopPropagation()}
+                        control={<Checkbox   />}
+                        label={key.toLocaleUpperCase()}
+                      />
+                      <Divider/>
+                        </Fragment>
+                      })
+                    }
+                  </div>
+                  </div>
+                    
+
                   </Accordion>)
             }
+           </div>
     <h4>Year</h4>
 
       <RadioGroup aria-label="Year" name="Year" >

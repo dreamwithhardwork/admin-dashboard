@@ -4,7 +4,7 @@ import Filter from "./filter";
 import {getRequest} from '../components/constants/headers'
 import SimpleBackdrop from "../components/messages/backdrop";
 
-const { Container } = require("@material-ui/core");
+const { Container, Paper, Chip } = require("@material-ui/core");
 const { default: CarListingCard } = require("./CarListingCard");
 
 function CarListing(props){
@@ -26,9 +26,10 @@ function CarListing(props){
       loaded?<Container style={{marginTop:"20px", width:"100%", display:"flex",flexWrap:"wrap",flexDirection:"column"}}>
       <Filter/>
       <div style={{maxWidth:"100%", display:"flex",flexWrap:"wrap", overflow:"auto"}}>
-       {
+      {
            models.map(model => <CarListingCard model ={model}/>)
        }
+       
       </div>
       </Container>: <SimpleBackdrop open={true}/>    
     )

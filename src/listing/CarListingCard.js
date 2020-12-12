@@ -13,7 +13,7 @@ function CarListingCard(props) {
                    <div>{props.model.fromYear}  {props.model.make} {props.model.name}</div> <FavoriteBorder/>
                 </Typography>
                 <Typography variant="caption" color="textSecondary" component="p">
-                   12,000 Kms * {props.model.fuelTypes===undefined?"":props.model.fuelTypes.join(", ")}
+                    {props.model.fuelTypes===undefined?"":props.model.fuelTypes.join(" / ")}
                </Typography>
             </CardContent>
             <CardActions>
