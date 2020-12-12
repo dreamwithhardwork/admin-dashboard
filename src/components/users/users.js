@@ -3,13 +3,15 @@ import { useState } from "react";
 import { tableIcons } from "../properties-v2/tableprops";
 import { getAllUsers ,deleteRow, addRow, uploadProfilePic, updateRow} from "./usersservice";
 import { CloudUpload } from "@material-ui/icons";
+import SimpleBackdrop from "../messages/backdrop";
 
 const { Container, TextField, MenuItem, ListItem, Button, Chip, LinearProgress } = require("@material-ui/core");
 const { default: MaterialTable } = require("material-table");
 
 function Users(props){
 
-    const [rows,setRows] = useState()
+    const [rows,setRows] = useState();
+    const [loaded,setLoaded] = useState(false);
 
     const handleUploadLogo = async (event,prop) => {
         console.log(prop)
@@ -26,11 +28,12 @@ function Users(props){
 
     useEffect(async ()=>{
       let response = await  getAllUsers();
-
+      setLoaded(true)
       setRows(response)
     },[])
 
     return(
+        loaded?
         <Container >
         <MaterialTable 
         title="Users"
@@ -78,7 +81,8 @@ function Users(props){
         }
         
         />
-        </Container>
+        </Container>:
+        <SimpleBackdrop open={true}/>
     )
 }
 

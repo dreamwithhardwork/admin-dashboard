@@ -55,13 +55,13 @@ function Filter(props){
     <h4>Year</h4>
 
       <RadioGroup aria-label="Year" name="Year" >
-        <FormControlLabel value="" control={<Radio />} label="2019 & above" />
-        <FormControlLabel value="male" control={<Radio />} label="2018 & above" />
-        <FormControlLabel value="other" control={<Radio />} label="2017 & above" />
-        <FormControlLabel value="disabled" control={<Radio />} label="2016 & above" />
-        <FormControlLabel value="male" control={<Radio />} label="2015 & above" />
-        <FormControlLabel value="other" control={<Radio />} label="2014 & above" />
-        <FormControlLabel value="disabled" control={<Radio />} label="2013 & above" />
+        <FormControlLabel value="2019" control={<Radio />} label="2019 & above" />
+        <FormControlLabel value="2018" control={<Radio />} label="2018 & above" />
+        <FormControlLabel value="2017" control={<Radio />} label="2017 & above" />
+        <FormControlLabel value="2016" control={<Radio />} label="2016 & above" />
+        <FormControlLabel value="2015" control={<Radio />} label="2015 & above" />
+        <FormControlLabel value="2014" control={<Radio />} label="2014 & above" />
+        <FormControlLabel value="2013" control={<Radio />} label="2013 & above" />
       </RadioGroup>  
 
       <h4>Fuel type</h4>

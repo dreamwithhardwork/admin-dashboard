@@ -8,12 +8,14 @@ import {getAllBrands,setBrand} from './brandservice';
 import { connect } from 'react-redux';
 import { ACTION_TYPES } from '../constants/constants';
 import { useRef } from 'react';
+import SimpleBackdrop from '../messages/backdrop';
 
 function Make(props){
 
     const [makeList,setMakeList] = useState([]);
     const [filterList, setFilterList] = useState([]);
     const [filter, setFilter] = useState(false);
+    const [loaded,setLoaded] = useState(false);
 
     const updateBrands = (newBrand) => {
         let newMakeList = [...makeList]
@@ -37,6 +39,9 @@ function Make(props){
 
     React.useEffect(async () => {
         let  n_makeList = await getAllBrands();
+        setTimeout(()=>{
+            setLoaded(true)
+        },300)
         console.log(props)
         props.dispatch({type:ACTION_TYPES.ADD_BRANDS,value:n_makeList});
         if(n_makeList.length>0)
@@ -48,17 +53,18 @@ function Make(props){
 
 
     return(
-        <Paper elevation={0} className="makeroot">
-            <AutoRideToolBar  type="Brand" filter={filterBrands}/>
-            <div className="makelist">
-                {
-                       
-                       filter?  filterList.map((make) => <Brand  key={make.id} src={make.logoUrl} data={make} update={updateBrands}/>)
-                       :props.brands.map((make) => <Brand  key={make.id} src={make.logoUrl} data={make} update={updateBrands}/>)
-                }
-            </div>
-            <NewBrandModel update={updateBrands} />
-        </Paper>
+        loaded?<Paper elevation={0} className="makeroot">
+        <AutoRideToolBar  type="Brand" filter={filterBrands}/>
+        <div className="makelist">
+            {
+                   
+                   filter?  filterList.map((make) => <Brand  key={make.id} src={make.logoUrl} data={make} update={updateBrands}/>)
+                   :props.brands.map((make) => <Brand  key={make.id} src={make.logoUrl} data={make} update={updateBrands}/>)
+            }
+        </div>
+        <NewBrandModel update={updateBrands} />
+    </Paper>:
+    <SimpleBackdrop open={true}/>
         
     )
 

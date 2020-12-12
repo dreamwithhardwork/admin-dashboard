@@ -4,21 +4,27 @@ const { Card, CardMedia, CardContent, CardActions, Typography } = require("@mate
 
 function CarListingCard(props) {
     console.log(props.model)
-    console.log(props.model.imagesWithColors!==null?props.model.imagesWithColors[Object.keys(props.model.imagesWithColors)][0].url:"")
+    console.log(props.model.imagesWithColors!==undefined?props.model.imagesWithColors[Object.keys(props.model.imagesWithColors)][0].url:"")
     return (
         <Card className="root">
-            <CardMedia className="media" image={props.model.imagesWithColors!==null?props.model.imagesWithColors[Object.keys(props.model.imagesWithColors)][0].url:""} />
+            <CardMedia className="media" image={props.model.imagesWithColors!==undefined?props.model.imagesWithColors[Object.keys(props.model.imagesWithColors)][0].url:""} />
             <CardContent>
                 <Typography style={{display:"flex",justifyContent:"space-between"}} gutterBottom variant="body1">
-                   <div>2018 {props.model.make} {props.model.name}</div> <FavoriteBorder/>
+                   <div>{props.model.fromYear}  {props.model.make} {props.model.name}</div> <FavoriteBorder/>
                 </Typography>
                 <Typography variant="caption" color="textSecondary" component="p">
-                   12,000 Kms * Petrol * Manual
+                   12,000 Kms * {props.model.fuelTypes===undefined?"":props.model.fuelTypes.join(", ")}
                </Typography>
             </CardContent>
             <CardActions>
             <Typography  variant="body1">
-                   <AttachMoney/>   7,38,000 /-
+            {[new Intl.NumberFormat('en-IN', {
+        style: 'currency',
+        currency: 'INR'
+        }).format(props.model.minPrice), " - ", new Intl.NumberFormat('en-IN', {
+            style: 'currency',
+            currency: 'INR'
+            }).format(props.model.maxPrice)]}
                 </Typography>
             </CardActions>
         </Card>
