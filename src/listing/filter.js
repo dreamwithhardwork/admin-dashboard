@@ -127,18 +127,15 @@ function Filter(props){
         <h4>Body type</h4>
 
       <FormGroup>
-          <FormControlLabel
-            control={<Checkbox />}
-            label="Hatchback"
-          />
-          <FormControlLabel
-            control={<Checkbox  />}
-            label="Sedan"
-          />
-          <FormControlLabel
-            control={<Checkbox />}
-            label="SUV"
-          />
+      {
+            ["SEDAN","HATCHBACK","COUPE","SUV","XUV","MUV","LUXURY","WAGON"]
+            .map(item => {
+              return <FormControlLabel
+              control={<Checkbox />}
+              label={item}
+            />
+            })
+          }
         </FormGroup>
 
         <h4>Transmission</h4>
