@@ -1,8 +1,10 @@
 import { CheckBox, ExpandMore } from '@material-ui/icons';
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect, useReducer, useState } from 'react';
 import { SERVICE_URL } from '../components/constants/constants';
-import { getRequest } from '../components/constants/headers';
+import { getRequest, putRequest } from '../components/constants/headers';
+import { ACTIONS } from './actions';
 import './CarListingCard.css'
+import { initialState, reducer } from './localreducer';
 const { Paper,Slider, Divider, Accordion, AccordionSummary, FormControlLabel, Checkbox, FormGroup, RadioGroup, Radio, FormLabel } = require("@material-ui/core");
 
   
@@ -10,7 +12,10 @@ const { Paper,Slider, Divider, Accordion, AccordionSummary, FormControlLabel, Ch
 function Filter(props){
 
   const [brands, setBrands] = useState (["Hyundai", "Maruti", "Kia", "Ford"])
-  const[priceRange,setPriceRange] = useState([90000,1000000]);
+  const[priceRange,setPriceRange] = useState([50000,5000000]);
+  const[localState, localDispatch] = useReducer(reducer,initialState)
+
+  console.log(props.filter)
   useEffect(async ()=>{
      let url = SERVICE_URL.GET_ALL_MAKE_MODELS;
      let response = await fetch(url, getRequest());
@@ -30,21 +35,24 @@ function Filter(props){
               <div style={{display:"flex",justifyContent:"space-between"}}>
               <div>{new Intl.NumberFormat('en-IN', {
                      style: 'currency',
-                     currency: 'INR'
+                     currency: 'INR',
+                     maximumSignificantDigits : 3
                   }).format(priceRange[0])}</div>
                      <div>{new Intl.NumberFormat('en-IN', {
                      style: 'currency',
-                     currency: 'INR'
+                     currency: 'INR',
+                     maximumSignificantDigits : 3
                   }).format(priceRange[1])}</div>
                  </div>
               <Slider
                  aria-labelledby="discrete-slider-always"
-                 step={10000}
+                 step={100000}
                  min={50000}
-                 max={2000000}
+                 max={5000000}
                  defaultValue={[...priceRange]}
                  track="inverted"
                  onChange={(e,value) => {
+                   props.filterPrices([...value]);
                    setPriceRange([...value])
                  }}
                  />
@@ -97,7 +105,7 @@ function Filter(props){
            </div>
     <h4>Year</h4>
 
-      <RadioGroup aria-label="Year" name="Year" >
+    {/*  <RadioGroup aria-label="Year" name="Year" >
         <FormControlLabel value="2019" control={<Radio />} label="2019 & above" />
         <FormControlLabel value="2018" control={<Radio />} label="2018 & above" />
         <FormControlLabel value="2017" control={<Radio />} label="2017 & above" />
@@ -105,7 +113,7 @@ function Filter(props){
         <FormControlLabel value="2015" control={<Radio />} label="2015 & above" />
         <FormControlLabel value="2014" control={<Radio />} label="2014 & above" />
         <FormControlLabel value="2013" control={<Radio />} label="2013 & above" />
-      </RadioGroup>  
+      </RadioGroup>   */}
 
       <h4>Fuel type</h4>
 
@@ -131,7 +139,7 @@ function Filter(props){
             ["SEDAN","HATCHBACK","COUPE","SUV","XUV","MUV","LUXURY","WAGON"]
             .map(item => {
               return <FormControlLabel
-              control={<Checkbox />}
+              control={<Checkbox name={item} onChange={props.filter} />}
               label={item}
             />
             })

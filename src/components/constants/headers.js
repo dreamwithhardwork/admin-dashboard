@@ -10,6 +10,19 @@ export const postRequest = (payload) => {
     header.headers.Authorization = "Bearer "+localStorage.getItem("token");
     return header;
   }
+
+  export const putRequest = (payload) => {
+    console.log(JSON.stringify(payload))
+      let header =  {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }
+      let jwt = localStorage.getItem("token");
+      if(jwt !== null && jwt !== undefined && jwt !== "undefined")
+      header.headers.Authorization = "Bearer "+localStorage.getItem("token");
+      return header;
+    }
   
   export const getRequest= () => {
     let header =  {
