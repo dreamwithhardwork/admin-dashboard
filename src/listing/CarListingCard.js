@@ -3,8 +3,6 @@ import './CarListingCard.css'
 const { Card, CardMedia, CardContent, CardActions, Typography } = require("@material-ui/core");
 
 function CarListingCard(props) {
-    console.log(props.model)
-    console.log(props.model.imagesWithColors!==undefined?props.model.imagesWithColors[Object.keys(props.model.imagesWithColors)][0].url:"")
     return (
         <Card className="root">
             <CardMedia className="media" image={props.model.imagesWithColors!==undefined?props.model.imagesWithColors[Object.keys(props.model.imagesWithColors)][0].url:""} />

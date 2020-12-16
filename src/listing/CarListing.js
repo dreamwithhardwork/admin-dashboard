@@ -15,6 +15,38 @@ function CarListing(props){
     let [models, setModels] = useState([]);
     let [loaded, setLoaded] = useState(false);
 
+    const handleTransmission = async (e) => {
+      let newBodyTypes = [...localState.filter.transmissionList];
+      let newState = {...localState};
+      let name = e.target.name;
+      if(e.target.checked)
+      newBodyTypes.push(name);
+      else
+      newBodyTypes.splice(newBodyTypes.indexOf(name),1);
+      console.log(newBodyTypes);
+      newState.filter.transmissionList = newBodyTypes;
+      let response = await fetch(SERVICE_URL.GET_ALL_MODEL,putRequest(newState.filter));
+      let body = await response.json();
+      console.log(body);
+      localDispatch({type:ACTIONS.GET_MODELS,value:body});
+    }
+
+    const handleMakeFilter = async (e) => {
+      let newBodyTypes = [...localState.filter.makeList];
+      let newState = {...localState};
+      let name = e.target.name;
+      if(e.target.checked)
+      newBodyTypes.push(name);
+      else
+      newBodyTypes.splice(newBodyTypes.indexOf(name),1);
+      console.log(newBodyTypes);
+      newState.filter.makeList = newBodyTypes;
+      let response = await fetch(SERVICE_URL.GET_ALL_MODEL,putRequest(newState.filter));
+      let body = await response.json();
+      console.log(body);
+      localDispatch({type:ACTIONS.GET_MODELS,value:body});
+    }
+
     const handleBodyTypeChange = async (e) => {
       let newBodyTypes = [...localState.filter.bodyTypes];
       let newState = {...localState};
@@ -41,6 +73,22 @@ function CarListing(props){
       localDispatch({type:ACTIONS.GET_MODELS,value:body});
    }
 
+   const handleFuelFilter = async (e) => {
+    let newBodyTypes = [...localState.filter.fuelTypes];
+    let newState = {...localState};
+    let name = e.target.name;
+    if(e.target.checked)
+    newBodyTypes.push(name);
+    else
+    newBodyTypes.splice(newBodyTypes.indexOf(name),1);
+    console.log(newBodyTypes);
+    newState.filter.fuelTypes = newBodyTypes;
+    let response = await fetch(SERVICE_URL.GET_ALL_MODEL,putRequest(newState.filter));
+    let body = await response.json();
+    console.log(body);
+    localDispatch({type:ACTIONS.GET_MODELS,value:body});
+   }
+
     useEffect(async ()=> {
       console.log(localState);
       console.log(localDispatch);
@@ -48,7 +96,6 @@ function CarListing(props){
       let models = await resp.json();
       setModels(models);
       localDispatch({type:ACTIONS.GET_MODELS,value:models})
-      
       setTimeout(()=>{
         setLoaded(true);
       },200)
@@ -57,7 +104,9 @@ function CarListing(props){
 
     return(
       loaded?<Container style={{marginTop:"20px", width:"100%", display:"flex",flexWrap:"wrap",flexDirection:"column"}}>
-      <Filter filter={handleBodyTypeChange} filterPrices = {handlePrices} />
+      <Filter filter={handleBodyTypeChange} filterPrices = {handlePrices}  filterTransmission={handleTransmission} filterMake={handleMakeFilter}
+         filterFuel = {handleFuelFilter}
+      />
       <div style={{maxWidth:"100%", display:"flex",flexWrap:"wrap", overflow:"auto"}}>
         {
           console.log(localState)

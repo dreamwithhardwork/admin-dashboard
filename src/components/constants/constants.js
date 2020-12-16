@@ -50,7 +50,7 @@ export const LOGIN_TYPE ={
     ADD_USER:process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/registered/users/add",
 
     GET_ALL_MAKES : process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/make/all?type=",
-    GET_ALL_MAKE_MODELS : process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/make/make-model",
+    GET_ALL_MAKE_MODELS : process.env.REACT_APP_EXT_SERVICE+"/makemodel/make-model",
     ADD_NEW_MAKE: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/make/add",
     DELETE_MAKE_BY_ID: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/make/delete?id=",
 
