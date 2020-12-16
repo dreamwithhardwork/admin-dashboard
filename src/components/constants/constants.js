@@ -55,8 +55,8 @@ export const LOGIN_TYPE ={
     DELETE_MAKE_BY_ID: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/make/delete?id=",
 
     ADD_NEW_MODEL: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/model/add",
-    GET_ALL_MODEL: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/model?make=",
-    GET_ALL_MODELS: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/model/all",
+    GET_ALL_MODEL: process.env.REACT_APP_EXT_SERVICE+"/makemodel?make=",
+    GET_ALL_MODELS: process.env.REACT_APP_EXT_SERVICE+"/makemodel/all",
 
     GET_CAR_PROPERTIES: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/properties/get/car",
     ADD_CAR_PROPERTIES: process.env.REACT_APP_ADMIN_SERVICE+"/api/v1/admin/properties/add/car",

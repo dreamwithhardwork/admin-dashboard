@@ -14,17 +14,18 @@ function Body(props) {
     return (
         <div className="autoride-body">
             <Switch>
-                <Route path="/make"> {props.login?<MakeComponent/>:<LogOut/>}  </Route>
-                <Route path='/rto'>{props.login?<RTO/>:<LogOut/>}  </Route>
-                <Route path="/addModel">{props.login?<ModelForm/>:<LogOut/>} </Route>
-                <Route path="/updateModel"> {props.login?<ModelForm update={true}/>:<LogOut/>} </Route>
-                <Route path="/addVariant"> {props.login?<AddVariant/>:<LogOut/>}  </Route>
-                <Route path="/users"> {props.login?<Users/>:<LogOut/>} </Route>
-                <Route path="/carProperties"> {props.login?<CarProperties/>:<LogOut/>}  </Route>
-                <Route path="/addVariantProps/:id"> {props.login?<CarSpecification />:<LogOut/>}  </Route>
-                <Route path="/brandTableView"> {props.login?<BrandTableView/>:<LogOut/>} </Route>
-                <Route path="/cars"> {props.login?<CarListing/>:<LogOut/>} </Route>
-                <Route path="*"><UnderConstruction /></Route>
+                <Route path="/make"> {props.login?<MakeComponent/>:<CarListing/>}  </Route>
+                <Route path='/rto'>{props.login?<RTO/>:<CarListing/>}  </Route>
+                <Route path="/addModel">{props.login?<ModelForm/>:<CarListing/>} </Route>
+                <Route path="/updateModel"> {props.login?<ModelForm update={true}/>:<CarListing/>} </Route>
+                <Route path="/addVariant"> {props.login?<AddVariant/>:<CarListing/>}  </Route>
+                <Route path="/users"> {props.login?<Users/>:<CarListing/>} </Route>
+                <Route path="/carProperties"> {props.login?<CarProperties/>:<CarListing/>}  </Route>
+                <Route path="/addVariantProps/:id"> {props.login?<CarSpecification />:<CarListing/>}  </Route>
+                <Route path="/brandTableView"> {props.login?<BrandTableView/>:<CarListing/>} </Route>
+                <Route path="/cars"> <CarListing/> </Route>
+                <Route path="/sellrequest"> <UnderConstruction/> </Route>
+                <Route path="*"><CarListing /></Route>
                 
             </Switch>
         </div>
