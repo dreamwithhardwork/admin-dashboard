@@ -16,7 +16,7 @@ import ViewColumn from '@material-ui/icons/ViewColumn';
 import { forwardRef, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { SERVICE_URL } from '../constants/constants';
+import { ACTION_TYPES, SERVICE_URL } from '../constants/constants';
 import { getRequest } from '../constants/headers';
 const { default: MaterialTable } = require("material-table");
 const { FormControlLabel, Switch, List, ListItem, ListItemText } = require("@material-ui/core");
@@ -42,26 +42,80 @@ const tableIcons = {
   };
 
   const handleRowAdd = (rowdata) => {
-      console.log(rowdata)
       let promise = new Promise((res,rej)=>{
         res()
       })
       return promise
   }
 
+  function updateKeyspecs(body,props){
+      var spec = [];
+      let modelprops = [];
+      body.map(item => {
+          let newItems = [...item.specifications]
+           newItems.map(i => {
+               spec.push(i);
+           })
+      });
+      spec.map(item => {
+          let newItems = [...item.properties]
+          newItems.map(i => {
+            modelprops.push(i);
+        })
+      })
+
+      let mileage = [],bhp=[],engine=[];
+      modelprops.map(item =>{
+        if(item.name === "Max Power"){
+            try{
+                let n = Number.parseFloat(item.value.substr(0,item.value.indexOf("bhp")));
+                bhp.push(n)
+            }catch(ex){}
+            
+
+          }else if(item.name === "Displacement (cc)"){
+            try{
+                let n = Number.parseFloat(item.value);
+                engine.push(n)
+            }catch(ex){}
+
+          } else if(item.name === "Mileage (ARAI)"){
+            try{
+                let n = Number.parseFloat(item.value);
+                mileage.push(n)
+            }catch(ex){}
+          }
+      });
+
+      mileage.sort(function(a, b){return b-a});
+      bhp.sort(function(a, b){return b-a});
+      engine.sort(function(a, b){return b-a});
+      
+      props.dispatch(
+          {
+              type:ACTION_TYPES.SET_MODEL_KEY_SPECS,
+            value:{
+                enginecc:engine.length===0?"--":engine[0],
+                bhp: bhp.length===0?"--":bhp[0],
+                mileage:mileage.length===0?"--":mileage[0]
+            }
+        }
+      )
+      
+      console.log(modelprops)
+  }
   
 
 function MakeTableView(props){
-    console.log(props)
     const[variants,setVariante] = useState([]);
     const history = useHistory();
 
     useEffect(async ()=>{
-
     let res = await fetch(SERVICE_URL.GET_VARIANTS_BY_MAKE_MODEL+"make="+props.activeBrand+"&model="+props.activeModel.name,getRequest());
-    let body = await res.json();
+    let body = await res.json();    
     setVariante(body)
-
+    console.log(body)
+    updateKeyspecs(body,props)
     },[props.activeModel])
 
     return(
@@ -97,9 +151,9 @@ function MakeTableView(props){
                render: rowData => <List component="nav">
                 <ListItem style={{color:"HighlightText",padding:"0px 6px"}}>
                     <ListItemText primary ={"Ex-showroom price"} secondary={new Intl.NumberFormat('en-IN', {
-        style: 'currency',
-        currency: 'INR'
-        }).format(rowData.exShowroomPrice)}></ListItemText>
+                     style: 'currency',
+                     currency: 'INR'
+                   }).format(rowData.exShowroomPrice)}></ListItemText>
                 </ListItem>
             </List>},
             {
@@ -110,7 +164,9 @@ function MakeTableView(props){
             ]
         } 
         
-        onRowClick={(event, rowData, togglePanel) => {}}
+        onRowClick={(event, rowData, togglePanel) => {
+            history.push("/viewModel/"+rowData.model+"/"+rowData.variantName+"/"+rowData.fuelType);
+        }}
         data={variants}
         >
 

@@ -11,7 +11,7 @@ const { Paper,Slider, Divider, Accordion, AccordionSummary, FormControlLabel, Ch
 function Filter(props){
 
   const [brands, setBrands] = useState (["Hyundai", "Maruti", "Kia", "Ford"])
-  const[priceRange,setPriceRange] = useState([50000,5000000]);
+  const[priceRange,setPriceRange] = useState([50000,4000000]);
 
   const [makeCheck,setMakeCheck] = useState({});
 
@@ -66,11 +66,11 @@ function Filter(props){
                      maximumSignificantDigits : 3
                   }).format(priceRange[1])}</div>
                  </div>
-              <Slider
+              <Slider 
                  aria-labelledby="discrete-slider-always"
-                 step={100000}
+                 step={50000}
                  min={50000}
-                 max={5000000}
+                 max={20000000}
                  defaultValue={[...priceRange]}
                  track="inverted"
                  onChange={(e,value) => {

@@ -21,6 +21,10 @@ const initialState = {
     activeCarProperty:"",
     carProperties: {},
     carPropertiesId:"",
+    enginecc:"",
+    bhp:"",
+    mileage:"",
+    seat:"--",
     variant:{
         bodyType: "",
         description: "",
@@ -129,6 +133,11 @@ const rootReducer = (state = initialState, action) => {
         break;
     case ACTION_TYPES.SET_VARIANT:
         newState.variant = action.value
+        break;
+    case ACTION_TYPES.SET_MODEL_KEY_SPECS:
+        newState.enginecc = action.value.enginecc;
+        newState.bhp = action.value.bhp;
+        newState.mileage = action.value.mileage;
         break;
         
 

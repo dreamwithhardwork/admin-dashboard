@@ -24,6 +24,20 @@
     width: 350px !important;
 }
 
+.spec-icon {
+    text-align: center;
+    position:absolute;
+    margin-top: 60px !important;
+    width: -webkit-fill-available;
+}
+.spec-icon-view {
+    text-align: center;
+    position:absolute;
+    margin-top: 80px !important;
+    width: -webkit-fill-available;
+    font-weight: 600 !important;
+}
+
 
 
 @media screen and (max-width:720px){

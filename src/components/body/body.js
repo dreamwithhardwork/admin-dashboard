@@ -9,6 +9,7 @@ import BrandTableView from '../make/tableview';
 import RTO from '../rto/rto';
 import CarListing from '../../listing/CarListing';
 import { connect } from 'react-redux';
+import ModelVariantView from '../../variantsview/modelvariantview';
 
 function Body(props) {
     return (
@@ -25,6 +26,7 @@ function Body(props) {
                 <Route path="/brandTableView"> {props.login?<BrandTableView/>:<CarListing/>} </Route>
                 <Route path="/cars"> <CarListing/> </Route>
                 <Route path="/sellrequest"> <UnderConstruction/> </Route>
+                <Route path="/viewModel/:name/:variantName/:fuelType"><ModelVariantView/></Route>
                 <Route path="*"><CarListing /></Route>
                 
             </Switch>
